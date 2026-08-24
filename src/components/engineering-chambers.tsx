@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { Inview } from "@/components/inview";
 
-/* 04 — ENGINEERING CHAMBERS
-   Three disciplines, three distinct spatial behaviors. Each chamber is
-   a full-width band whose ground behaves like the discipline it holds:
-   fiber — fine drifting linear structures; copper — dense structured
-   geometry; electro-mechanical — modular assembly grid. Abstract only:
-   nothing here implies a specification ClearEdge has not verified. */
+/* ENGINEERING DISCIPLINES — technical rows.
+   Each discipline is one full-width entry in an engineering register:
+   large title, short description, structural texture behind, arrow.
+   Hover answers with movement, a signal point and a drawn underline.
+   No cards, no rounded surfaces, no background floods. */
 
-const chambers = [
+const disciplines = [
   {
     id: "fiber-optic",
     name: "Fiber Optic",
@@ -35,37 +34,54 @@ const chambers = [
 export function EngineeringChambers({ withIds = false }: { withIds?: boolean }) {
   return (
     <div>
-      {chambers.map((c) => (
-        <Inview key={c.id}>
+      {disciplines.map((d, i) => (
+        <Inview key={d.id}>
           <section
-            {...(withIds ? { id: c.id } : {})}
-            aria-labelledby={withIds ? `${c.id}-chamber-heading` : undefined}
-            className={`chamber ${c.cls} scroll-mt-24 border-t border-line first:border-t-0 text-fg`}
+            {...(withIds ? { id: d.id } : {})}
+            aria-labelledby={withIds ? `${d.id}-chamber-heading` : undefined}
+            className={`chamber ${d.cls} scroll-mt-28 border-t border-line text-fg last:border-b ${
+              i === 0 ? "border-t-0" : ""
+            }`}
           >
-            <div className="relative mx-auto max-w-[84rem] px-5 py-14 md:px-10 md:py-20">
-              <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-end lg:gap-16">
-                <h3
-                  id={withIds ? `${c.id}-chamber-heading` : undefined}
-                  className="font-display text-[clamp(2rem,1.5rem+3vw,4rem)] font-semibold leading-[0.98] tracking-tight"
-                >
-                  <Link href={c.href} className="transition-colors duration-200 hover:text-accent">
-                    {c.name}
-                  </Link>
-                </h3>
-                <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-                  <p className="type-body max-w-md text-fg-muted">{c.line}</p>
-                  <Link
-                    href={c.href}
-                    className="shrink-0 text-sm font-semibold text-accent transition-transform duration-200 hover:translate-x-1"
-                    aria-label={`${c.name} — learn more`}
-                  >
-                    <svg width="26" height="16" viewBox="0 0 26 16" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
-                      <path d="M0 8h23M17 1l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <Link
+              href={d.href}
+              className="group relative mx-auto flex max-w-[84rem] flex-col gap-6 px-5 py-12 md:flex-row md:items-center md:gap-14 md:px-10 md:py-16"
+              aria-label={`${d.name} — view capability`}
+            >
+              <span className="label-mono w-10 shrink-0 !text-[0.66rem] text-fg-faint transition-colors duration-200 group-hover:text-signal">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              <h3
+                id={withIds ? `${d.id}-chamber-heading` : undefined}
+                className="min-w-0 flex-1 font-display text-[clamp(1.85rem,1.5rem+2.6vw,3.3rem)] font-semibold leading-[1.02] tracking-[-0.025em]"
+              >
+                <span className="relative inline-block transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-2">
+                  {d.name}
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-signal transition-transform duration-300 group-hover:scale-x-100"
+                  />
+                </span>
+              </h3>
+
+              <p className="max-w-md shrink-0 text-sm leading-relaxed text-fg-muted md:text-right">
+                {d.line}
+              </p>
+
+              <svg
+                width="30"
+                height="16"
+                viewBox="0 0 30 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+                className="hidden shrink-0 text-fg-faint transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-signal lg:block"
+              >
+                <path d="M0 8h27M21 1l7 7-7 7" />
+              </svg>
+            </Link>
           </section>
         </Inview>
       ))}

@@ -61,7 +61,7 @@ export default function AboutPage() {
       />
 
       {/* the editorial sheet */}
-      <section className="theme-light bg-bg text-fg" aria-labelledby="position-heading">
+      <section className="bg-bg text-fg" aria-labelledby="position-heading">
         <div className="mx-auto max-w-[84rem] px-5 py-20 md:px-10 md:py-32">
           <Inview>
             <h2 id="position-heading" className="display-l max-w-4xl">
@@ -150,7 +150,7 @@ export default function AboutPage() {
       </section>
 
       {/* principles — night reflection */}
-      <section className="bg-bg-deep text-fg" aria-labelledby="principles-heading">
+      <section className="theme-dark bg-bg-deep text-fg" aria-labelledby="principles-heading">
         <div className="mx-auto max-w-[84rem] px-5 py-20 md:px-10 md:py-32">
           <Inview>
             <h2 id="principles-heading" className="display-l max-w-3xl">
@@ -178,7 +178,7 @@ export default function AboutPage() {
       </section>
 
       {/* company details */}
-      <section className="theme-light bg-bg text-fg" aria-labelledby="details-heading">
+      <section className="bg-bg-warm text-fg" aria-labelledby="details-heading">
         <div className="mx-auto grid max-w-[84rem] gap-10 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
           <Inview>
             <h2 id="details-heading" className="display-m">

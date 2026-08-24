@@ -8,7 +8,7 @@ import mainlogo from "@/assets/mainlogo.png";
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-line bg-bg-deep text-fg">
+    <footer className="theme-dark border-t border-line/50 bg-bg-deep text-fg">
       <div className="mx-auto max-w-[84rem] px-5 pb-12 pt-16 md:px-10 md:pt-20">
         {/* identity */}
         <div className="grid gap-10 lg:grid-cols-[1.4fr_2fr] lg:gap-20">

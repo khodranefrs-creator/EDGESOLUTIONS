@@ -15,13 +15,15 @@ export const company = {
   email: "info@ClearEdgeSolutions.com",
 } as const;
 
-/* Primary navigation order per the Connectivity Architecture IA.
-   Products carries the mega-directory trigger in the desktop header. */
+/* Primary navigation of the engineering documentation system.
+   Products carries the product-directory trigger in the desktop header;
+   Resources aggregates quote access, directory and legal documents. */
 export const navItems = [
-  { href: "/capabilities", label: "Capabilities" },
   { href: "/products", label: "Products" },
+  { href: "/capabilities", label: "Capabilities" },
   { href: "/industries", label: "Industries" },
   { href: "/about", label: "About" },
+  { href: "/resources", label: "Resources" },
   { href: "/contact", label: "Contact" },
 ] as const;
 

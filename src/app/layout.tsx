@@ -1,18 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Instrument_Sans, Manrope, IBM_Plex_Mono } from "next/font/google";
 import { company } from "@/lib/site";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
-/* Typography of The Connection Infrastructure:
-   — Instrument Sans carries everything: display statements and body,
-     editorial and industrial, sentence case
+/* Typography of the engineering documentation system:
+   — Instrument Sans carries display statements and UI: architectural,
+     confident, sentence case
+   — Manrope carries body copy: editorial warmth with technical clarity
    — IBM Plex Mono only where information is genuinely technical */
 const instrument = Instrument_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-instrument",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -36,8 +44,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0c0e11",
-  colorScheme: "dark light",
+  themeColor: "#ffffff",
+  colorScheme: "light dark",
 };
 
 const orgSchema = {
@@ -72,7 +80,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrument.variable} ${plexMono.variable}`}
+      className={`${instrument.variable} ${manrope.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <head>

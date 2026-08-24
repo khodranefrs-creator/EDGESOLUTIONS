@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { industries, productFamilies } from "@/lib/site";
 
-/* THE EDGE FIELD — the signature device of The Connection Infrastructure.
-   A living spatial network of the relations that actually exist in the
-   company's data: each industry connects to the product families that
-   verifiably serve it. Hovering or focusing an industry illuminates its
-   real connections; everything else recedes. Touch pins a selection.
-   On mobile the same relations stack vertically — no table, no cards,
-   nothing invented. */
+/* THE SYSTEM MAP — where the connections go.
+   A living drawing of the relations that actually exist in the
+   company's data: each industry connects to the product families
+   that verifiably serve it. Hovering or focusing an industry traces
+   its real connections in signal blue; everything else recedes.
+   Touch pins a selection. On mobile the same verified relations
+   stack as a readable register — the desktop drawing is never
+   forced onto a small screen. */
 
 const INDUSTRY_Y: Record<string, number> = {
   "data-centers": 80,
@@ -41,7 +42,7 @@ export function EdgeField() {
 
   return (
     <div>
-      {/* -------------------------------------------- desktop field */}
+      {/* -------------------------------------------- desktop system map */}
       <div className="relative hidden h-[620px] select-none lg:block">
         <svg
           aria-hidden="true"
@@ -50,6 +51,10 @@ export function EdgeField() {
           fill="none"
           className="absolute inset-0 h-full w-full text-fg-faint"
         >
+          {/* faint column rails */}
+          <line x1="218" y1="24" x2="218" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.18" />
+          <line x1="782" y1="24" x2="782" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.18" />
+
           {EDGES.map(({ industry, family }) => {
             const iy = INDUSTRY_Y[industry];
             const fx = FAMILY_XY[family].x;
@@ -59,10 +64,11 @@ export function EdgeField() {
             return (
               <path
                 key={`${industry}-${family}`}
-                d={`M218 ${iy}C460 ${iy} 500 ${fy} ${fx - 9} ${fy}`}
+                d={`M224 ${iy}C460 ${iy} 520 ${fy} ${fx - 12} ${fy}`}
                 stroke={live ? "#0092fc" : "currentColor"}
-                strokeWidth={live ? 2 : 1.25}
-                opacity={live ? 1 : dim ? 0.14 : 0.32}
+                strokeWidth={live ? 1.75 : 1}
+                strokeDasharray={live ? "none" : "3 6"}
+                opacity={live ? 1 : dim ? 0.16 : 0.42}
                 vectorEffect="non-scaling-stroke"
                 className="transition-all duration-300"
               />
@@ -75,14 +81,14 @@ export function EdgeField() {
             return (
               <rect
                 key={ind.id}
-                x="204"
-                y={y - 7}
-                width="14"
-                height="14"
+                x="212"
+                y={y - 6}
+                width="12"
+                height="12"
                 stroke={live ? "#0092fc" : "currentColor"}
                 strokeWidth={live ? 2 : 1.25}
                 fill={live ? "#0092fc" : "var(--bg)"}
-                opacity={dim ? 0.25 : 1}
+                opacity={dim ? 0.28 : 1}
                 vectorEffect="non-scaling-stroke"
                 className="transition-all duration-300"
               />
@@ -100,10 +106,10 @@ export function EdgeField() {
                 cx={x}
                 cy={y}
                 r={live ? 7 : 5}
-                fill={live ? "#0092fc" : "none"}
+                fill={live ? "#0092fc" : "var(--bg)"}
                 stroke={live ? "#0092fc" : "currentColor"}
                 strokeWidth="1.5"
-                opacity={dim ? 0.22 : 1}
+                opacity={dim ? 0.25 : 1}
                 vectorEffect="non-scaling-stroke"
                 className="transition-all duration-300"
               />
@@ -112,7 +118,7 @@ export function EdgeField() {
         </svg>
 
         {/* industry controls */}
-        {industries.map((ind) => {
+        {industries.map((ind, i) => {
           const live = active === ind.id;
           const dim = !!active && !live;
           return (
@@ -130,20 +136,22 @@ export function EdgeField() {
               }`}
               style={{ top: `${(INDUSTRY_Y[ind.id] / 620) * 100}%` }}
             >
+              <span className="label-mono block !text-[0.58rem] text-fg-faint">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <span
-                className={`block font-display text-xl font-semibold leading-tight tracking-tight transition-colors duration-200 xl:text-2xl ${
+                className={`mt-1 block font-display text-xl font-semibold leading-tight tracking-tight transition-colors duration-200 xl:text-2xl ${
                   live ? "text-accent" : "text-fg"
                 }`}
               >
                 {ind.name}
               </span>
-              <span className="mt-1 block text-xs text-fg-faint">{ind.line.split(/[.,—]/)[0]}</span>
             </button>
           );
         })}
 
-        {/* family labels */}
-        {productFamilies.map((fam) => {
+        {/* family terminals */}
+        {productFamilies.map((fam, i) => {
           const live =
             active !== null &&
             EDGES.some((e) => e.family === fam.id && e.industry === active);
@@ -152,19 +160,22 @@ export function EdgeField() {
             <div
               key={fam.id}
               aria-hidden="true"
-              className={`pointer-events-none absolute left-[81%] max-w-[16rem] -translate-y-1/2 pl-10 transition-opacity duration-300 ${
+              className={`pointer-events-none absolute left-[81%] max-w-[17rem] -translate-y-1/2 pl-10 transition-opacity duration-300 ${
                 dim ? "opacity-35" : "opacity-100"
               }`}
               style={{ top: `${(FAMILY_XY[fam.id].y / 620) * 100}%` }}
             >
+              <p className="label-mono block !text-[0.58rem] text-fg-faint">
+                {String(i + 1).padStart(2, "0")}
+              </p>
               <p
-                className={`font-display text-xl font-semibold tracking-tight transition-colors duration-200 xl:text-2xl ${
+                className={`mt-1 font-display text-xl font-semibold tracking-tight transition-colors duration-200 xl:text-2xl ${
                   live ? "text-accent" : "text-fg-muted"
                 }`}
               >
-                {fam.name}
+                {fam.shortName}
               </p>
-              <p className={`mt-1 text-xs leading-relaxed text-fg-faint transition-opacity duration-300 ${live ? "opacity-100" : "opacity-0"}`}>
+              <p className={`mt-1 text-xs leading-relaxed text-fg-muted transition-opacity duration-300 ${live ? "opacity-100" : "opacity-0"}`}>
                 Serves this industry
               </p>
             </div>
@@ -172,26 +183,31 @@ export function EdgeField() {
         })}
       </div>
 
-      {/* -------------------------------------------- stacked field (mobile / tablet) */}
+      {/* ------------------------------------- stacked register (mobile) */}
       <div className="lg:hidden">
         <ul className="border-t border-line-strong">
-          {industries.map((ind) => {
+          {industries.map((ind, i) => {
             const related = EDGES.filter((e) => e.industry === ind.id).map(
               (e) => productFamilies.find((f) => f.id === e.family)!,
             );
             return (
               <li key={ind.id} className="border-b border-line py-8">
-                <h3 className="font-display text-[clamp(1.55rem,1.3rem+2vw,2.2rem)] font-semibold tracking-tight">
-                  {ind.name}
-                </h3>
-                <p className="mt-2 max-w-md text-sm leading-relaxed text-fg-muted">{ind.line}</p>
-                <ul className="mt-5 space-y-1 border-l-2 border-line-strong pl-5">
+                <div className="flex items-baseline gap-4">
+                  <span className="label-mono !text-[0.62rem] text-signal-deep">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-display text-[clamp(1.5rem,1.3rem+1.8vw,2rem)] font-semibold tracking-tight">
+                    {ind.name}
+                  </h3>
+                </div>
+                <p className="mt-2.5 max-w-md pl-10 text-sm leading-relaxed text-fg-muted">{ind.line}</p>
+                <ul className="mt-5 space-y-1 border-l border-line-strong pl-10">
                   {related.map((family) => (
                     <li key={family.id} className="flex items-center gap-3">
-                      <span aria-hidden="true" className="h-[7px] w-[7px] shrink-0 bg-accent" />
+                      <span aria-hidden="true" className="h-[7px] w-[7px] shrink-0 bg-signal" />
                       <Link
                         href={`/products#${family.id}`}
-                        className="py-1.5 text-base font-medium transition-colors hover:text-accent"
+                        className="py-1.5 font-display text-base font-semibold transition-colors hover:text-accent"
                       >
                         {family.name}
                       </Link>

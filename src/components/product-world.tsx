@@ -7,24 +7,18 @@ import { productFamilies, industries } from "@/lib/site";
 import mtpTrunkAssembly from "@/assets/mtp-trunk-assembly.webp";
 import { CopperComposition, BoxComposition } from "@/components/glyphs";
 
-/* THE PRODUCT OBSERVATORY — full page instrument.
-   One visual environment holds all three families; selecting one
-   changes the environment around it. Deep links (/products#id)
-   resolve to the matching environment on arrival, and every change
-   is mirrored into the URL so a selection can be shared. Fiber shows
-   the approved photography; copper and electro-mechanical show
-   original abstract geometry — nothing invented. */
+/* THE PRODUCT CATALOG — full page instrument.
+   One documentation environment holds all three families; selecting
+   one changes the plate around it. Deep links (/products#id) resolve
+   to the matching sheet on arrival and every change is mirrored into
+   the URL so a selection can be shared. Fiber shows the approved
+   photography; copper and electro-mechanical show original schematic
+   geometry — nothing invented. */
 
 const stageGround: Record<string, string> = {
-  "fiber-optic": "#eef0f2",
-  "copper-cabling": "#f0ece2",
-  "electro-mechanical": "#ecebe6",
-};
-
-const chamberClass: Record<string, string> = {
-  "fiber-optic": "chamber-fiber",
-  "copper-cabling": "chamber-copper",
-  "electro-mechanical": "chamber-electro",
+  "fiber-optic": "#f2f3f4",
+  "copper-cabling": "#f4f1ea",
+  "electro-mechanical": "#f1f0ec",
 };
 
 export function ProductWorld() {
@@ -66,12 +60,13 @@ export function ProductWorld() {
   }
 
   const active = productFamilies.find((f) => f.id === activeId)!;
+  const activeIndex = productFamilies.indexOf(active);
 
   return (
     <div>
       {/* stable jump targets for /products#<family> */}
       {productFamilies.map((f) => (
-        <div key={f.id} id={f.id} aria-hidden="true" className="h-0 scroll-mt-24" />
+        <div key={f.id} id={f.id} aria-hidden="true" className="h-0 scroll-mt-28" />
       ))}
 
       {/* selector */}
@@ -95,19 +90,19 @@ export function ProductWorld() {
               aria-controls={`world-panel-${family.id}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => select(family.id)}
-              className={`relative pb-6 pt-2 text-left transition-colors duration-200 ${
-                selected ? "text-fg" : "text-fg-faint hover:text-fg-muted"
+              className={`relative pb-5 pt-2 text-left transition-colors duration-200 ${
+                selected ? "text-fg" : "text-fg-muted hover:text-fg"
               }`}
             >
-              <span className="block font-display text-[clamp(2rem,1.4rem+3vw,4rem)] font-semibold leading-none tracking-tight">
-                {family.shortName}
+              <span className="block font-display text-[clamp(1.9rem,1.4rem+2.6vw,3.6rem)] font-semibold leading-none tracking-[-0.025em]">
+                {i === 0 ? "Fiber Optic" : i === 1 ? "Copper" : "Electro-Mechanical"}
               </span>
-              <span className="meta-mono mt-3 block !text-[0.6rem] text-fg-faint">
+              <span className="label-mono mt-3 block !text-[0.58rem] text-fg-faint">
                 {String(i + 1).padStart(2, "0")} — {family.tagline}
               </span>
               <span
                 aria-hidden="true"
-                className={`absolute inset-x-0 bottom-[-1px] h-[3px] origin-left bg-accent transition-transform duration-300 ${
+                className={`absolute inset-x-0 bottom-[-1px] h-[2px] origin-left bg-signal transition-transform duration-300 ${
                   selected ? "scale-x-100" : "scale-x-0"
                 }`}
               />
@@ -116,7 +111,7 @@ export function ProductWorld() {
         })}
       </div>
 
-      {/* environment */}
+      {/* catalog sheet */}
       <div
         key={active.id}
         role="tabpanel"
@@ -124,45 +119,55 @@ export function ProductWorld() {
         aria-labelledby={`world-tab-${active.id}`}
         className="env-in"
       >
-        <div className="mt-14 grid gap-14 lg:grid-cols-[1.35fr_1fr] lg:gap-20">
-          {/* stage */}
-          <div
-            data-family={active.id}
-            className={`chamber ${chamberClass[active.id]} relative flex min-h-[320px] items-center justify-center overflow-hidden p-8 sm:min-h-[440px] lg:min-h-[600px]`}
-            style={{ backgroundColor: stageGround[active.id], color: "#3d444d" }}
-          >
-            {active.id === "fiber-optic" ? (
-              <Image
-                src={mtpTrunkAssembly}
-                alt="Multi-fiber trunk cable assembly with an aqua jacket and MPO-style connectors"
-                sizes="(max-width: 1024px) 100vw, 860px"
-                className="relative z-[1] h-auto max-h-[500px] w-full object-contain drop-shadow-[0_24px_50px_rgba(0,0,0,0.18)]"
-              />
-            ) : (
-              <div className="relative z-[1] flex h-full w-full items-center justify-center py-8">
-                {active.id === "copper-cabling" ? (
-                  <CopperComposition className="h-auto max-h-[500px] w-full max-w-2xl" />
-                ) : (
-                  <BoxComposition className="h-auto max-h-[500px] w-full max-w-2xl" />
-                )}
-              </div>
-            )}
-            <p className="meta-mono absolute bottom-5 left-6 z-[1] !text-[0.58rem]" aria-hidden="true">
-              {active.name}
-            </p>
+        <div className="mt-14 grid items-center gap-14 lg:grid-cols-[1.25fr_1fr] lg:gap-20">
+          {/* specimen plate */}
+          <div className="plate reg-corners relative bg-white p-4 sm:p-6">
+            <div className="flex items-baseline justify-between px-2 pt-1">
+              <span className="label-mono !text-[0.62rem] text-fg-faint">
+                FIG. {String(activeIndex + 1).padStart(2, "0")}
+              </span>
+              <span className="label-mono hidden !text-[0.56rem] text-fg-faint sm:block">
+                {active.id === "fiber-optic" ? "REPRESENTATIVE ASSEMBLY" : "SCHEMATIC REPRESENTATION"}
+              </span>
+            </div>
+            <div
+              data-family={active.id}
+              className="relative mt-4 flex min-h-[280px] items-center justify-center overflow-hidden border border-line p-6 sm:min-h-[400px] md:p-10 lg:min-h-[520px]"
+              style={{ backgroundColor: stageGround[active.id], color: "#3d444d" }}
+            >
+              {active.id === "fiber-optic" ? (
+                <Image
+                  src={mtpTrunkAssembly}
+                  alt="Multi-fiber trunk cable assembly with an aqua jacket and MPO-style connectors"
+                  sizes="(max-width: 1024px) 100vw, 820px"
+                  className="relative z-[1] h-auto max-h-[440px] w-full object-contain"
+                />
+              ) : (
+                <div className="relative z-[1] flex h-full w-full items-center justify-center py-6">
+                  {active.id === "copper-cabling" ? (
+                    <CopperComposition className="h-auto max-h-[420px] w-full max-w-2xl" />
+                  ) : (
+                    <BoxComposition className="h-auto max-h-[420px] w-full max-w-2xl" />
+                  )}
+                </div>
+              )}
+              <p className="meta-mono absolute bottom-4 left-5 z-[1] !text-[0.56rem]" aria-hidden="true">
+                {active.name}
+              </p>
+            </div>
           </div>
 
-          {/* dossier */}
+          {/* documentation column */}
           <div className="flex flex-col justify-center">
-            <p className="label-mono !text-[0.62rem] text-accent">
-              Family {String(productFamilies.indexOf(active) + 1).padStart(2, "0")} / 03
+            <p className="label-mono !text-[0.62rem] text-signal-deep">
+              Family {String(activeIndex + 1).padStart(2, "0")} / 03
             </p>
             <h3 className="display-m mt-5">{active.name}</h3>
-            <p className="type-lede mt-5 text-fg-muted">{active.tagline}.</p>
+            <p className="type-lede mt-5 !text-[1.08rem] text-fg-muted">{active.tagline}.</p>
             <p className="type-body measure mt-6 text-fg-muted">{active.description}</p>
 
-            <div className="mt-10">
-              <p className="meta-mono !text-[0.6rem] text-fg-faint">Where it applies</p>
+            <div className="mt-10 border-t border-line pt-7">
+              <p className="label-mono !text-[0.6rem] text-fg-faint">Where it applies</p>
               <ul className="mt-3 flex flex-wrap gap-x-7 gap-y-2">
                 {active.applications.map((appId) => {
                   const ind = industries.find((x) => x.id === appId);
@@ -178,8 +183,8 @@ export function ProductWorld() {
               </ul>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-9 gap-y-4 border-t border-line pt-7">
-              <Link href={`/contact?capability=${active.id}#quote-form`} className="btn btn-primary !py-3.5">
+            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <Link href={`/contact?capability=${active.id}#quote-form`} className="btn btn-primary !py-3.5 !text-[0.9rem]">
                 Discuss this family
               </Link>
               <Link href="/capabilities#contract-manufacturing" className="text-link">

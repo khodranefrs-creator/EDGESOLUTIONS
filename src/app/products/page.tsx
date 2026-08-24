@@ -28,7 +28,7 @@ export default function ProductsPage() {
         lede="Three product families spanning the entire signal path — fiber optic, copper, and electro-mechanical assemblies, each engineered around your requirements rather than a fixed catalogue."
       />
 
-      <section className="theme-light bg-bg text-fg" aria-label="Product families">
+      <section className="bg-bg text-fg" aria-label="Product families">
         <div className="mx-auto max-w-[84rem] px-5 pb-24 pt-4 md:px-10 md:pb-36">
           <ProductWorld />
         </div>

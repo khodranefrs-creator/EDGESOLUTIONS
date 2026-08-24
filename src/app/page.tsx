@@ -29,10 +29,9 @@ export default function HomePage() {
       <section
         id="products"
         aria-labelledby="home-products-heading"
-        className="theme-light scroll-mt-20 bg-bg text-fg"
+        className="scroll-mt-20 bg-bg text-fg"
       >
         <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
-          <p className="label-mono text-fg-faint">Products</p>
           <h2 id="home-products-heading" className="display-l mt-6 max-w-3xl">
             Three families. One connection
             infrastructure.
@@ -43,14 +42,16 @@ export default function HomePage() {
       </section>
 
       {/* 04 — engineering */}
-      <section id="engineering" aria-labelledby="home-engineering-heading" className="scroll-mt-20">
-        <div className="bg-bg-deep text-fg">
-          <div className="mx-auto max-w-[84rem] px-5 pb-16 pt-24 md:px-10 md:pb-24 md:pt-36">
-            <p className="label-mono text-fg-faint">Engineering</p>
-            <h2 id="home-engineering-heading" className="display-l mt-6 max-w-3xl">
-              Every discipline has its own&nbsp;behavior.
-            </h2>
-          </div>
+      <section
+        id="engineering"
+        aria-labelledby="home-engineering-heading"
+        className="theme-dark scroll-mt-20 bg-bg-deep text-fg"
+      >
+        <div className="mx-auto max-w-[84rem] px-5 pb-14 pt-24 md:px-10 md:pb-16 md:pt-36">
+          <p className="label-mono !text-[0.62rem] text-signal">Capabilities</p>
+          <h2 id="home-engineering-heading" className="display-l mt-6 max-w-3xl">
+            Every discipline has its own&nbsp;behavior.
+          </h2>
         </div>
         <EngineeringChambers />
       </section>
@@ -62,12 +63,11 @@ export default function HomePage() {
         className="scroll-mt-20 bg-bg text-fg"
       >
         <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
-          <p className="label-mono text-fg-faint">Applications</p>
-          <div className="mt-6 flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
+          <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
             <h2 id="home-applications-heading" className="display-l max-w-2xl">
               Where the connections&nbsp;go.
             </h2>
-            <p className="label-mono max-w-xs pb-2 !text-[0.62rem] leading-relaxed text-fg-faint">
+            <p className="label-mono max-w-xs pb-2 !text-[0.6rem] leading-relaxed text-fg-faint">
               HOVER TO TRACE A RELATION · CLICK TO PIN IT
             </p>
           </div>

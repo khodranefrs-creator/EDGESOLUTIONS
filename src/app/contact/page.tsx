@@ -39,7 +39,7 @@ export default function ContactPage() {
         lede="Share your requirement and the right people at ClearEdge will respond — engineers included."
       />
 
-      <section className="theme-light bg-bg text-fg">
+      <section className="bg-bg text-fg">
         <div className="mx-auto grid max-w-[84rem] gap-14 px-5 py-20 md:px-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20 lg:py-28">
           <div>
             <Inview>

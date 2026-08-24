@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="bg-bg-deep text-fg">
+    <section className="theme-dark bg-bg-deep text-fg">
       <div className="mx-auto flex min-h-[80svh] max-w-4xl flex-col items-start justify-center px-5 py-32 md:px-10">
         <p className="label-mono text-accent">Error 404</p>
         <h1 className="display-l mt-7">This pathway doesn&rsquo;t&nbsp;connect.</h1>

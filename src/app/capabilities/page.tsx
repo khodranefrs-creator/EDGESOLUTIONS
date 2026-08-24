@@ -32,10 +32,12 @@ export default function CapabilitiesPage() {
       />
 
       {/* the three manufacturing chambers (anchored) */}
-      <EngineeringChambers withIds />
+      <div className="theme-dark bg-bg-deep text-fg">
+        <EngineeringChambers withIds />
+      </div>
 
       {/* the two disciplines that run through everything */}
-      <section id="engineering" className="scroll-mt-28 bg-bg-deep text-fg" aria-labelledby="collab-heading">
+      <section id="engineering" className="theme-dark scroll-mt-28 border-t border-line/60 bg-bg-deep text-fg" aria-labelledby="collab-heading">
         <div className="mx-auto grid max-w-[84rem] gap-12 px-5 py-20 md:px-10 md:py-32 lg:grid-cols-2 lg:gap-20">
           <Inview>
             <p className="label-mono !text-[0.62rem] text-accent">04</p>
@@ -69,7 +71,7 @@ export default function CapabilitiesPage() {
       </section>
 
       {/* routing note */}
-      <section className="theme-light bg-bg text-fg" aria-label="Where to begin">
+      <section className="bg-bg text-fg" aria-label="Where to begin">
         <div className="mx-auto flex max-w-[84rem] flex-wrap items-center justify-between gap-x-16 gap-y-6 px-5 py-16 md:px-10 md:py-20">
           <p className="display-m max-w-2xl !text-[clamp(1.6rem,1.3rem+1.6vw,2.4rem)]">
             Not sure which discipline fits your&nbsp;requirement?

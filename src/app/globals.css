@@ -1,61 +1,64 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   CLEAR EDGE — THE CONNECTION INFRASTRUCTURE
+   CLEAR EDGE — ENGINEERING DOCUMENTATION SYSTEM
    ------------------------------------------------------------------
-   One idea: ClearEdge sits between infrastructure, engineering,
-   products and real-world applications. The site is a place you
-   move through, not a document you read.
+   The visual metaphor: ClearEdge is the connection layer between
+   complex systems. Every screen is a page of product documentation
+   from a serious manufacturer — white paper, graphite ink, one
+   signal color, specimen plates, drawn lines.
 
-   Voice:  Instrument Sans — editorial, industrial, sentence case.
-           IBM Plex Mono only where information is genuinely technical.
-   Ground: deep graphite and warm architectural white, with one
-           restrained neutral gray. Backgrounds change when the
-           narrative changes — never on a rhythm.
-   Signal: ClearEdge blue #0092FC. A signal and an action. Never a
-           background mass.
+   Type:   Instrument Sans — architectural grotesk for display and UI.
+           Manrope — body voice. IBM Plex Mono — technical metadata
+           only (FIG., coordinates, IDs, annotations).
+   Ground: WHITE PAPER is the default. GRAPHITE is deliberate — used
+           when the narrative drops a level (statement, disciplines,
+           resolution). WARM OFF-WHITE marks editorial standards.
+   Signal: ClearEdge blue #0092FC — actions, endpoints, selected
+           states, small markers. Never a background mass.
    ================================================================== */
 
 :root {
+  /* paper context — default */
   --signal: #0092fc;
-  --signal-deep: #0071c4; /* signal as text on light ground */
-  --signal-ink: #062033;
+  --signal-deep: #0071c4;
 
-  /* night context — default */
-  --bg: #0b0d10;
-  --bg-deep: #07080a;
-  --surface: #12151a;
-  --surface-2: #161a20;
-  --fg: #f2efe9;
-  --fg-muted: #a2a8b0;
-  --fg-faint: #6d747d;
-  --line: rgb(242 239 233 / 0.08);
-  --line-strong: rgb(242 239 233 / 0.17);
-  --accent: var(--signal);
-  --accent-ink: var(--signal-ink);
-  --error: #ff8a6b;
-}
+  --bg: #ffffff;
+  --bg-warm: #f4f2ed;
+  --bg-deep: #0c0e11;
+  --bg-deeper: #090b0e;
+  --surface: #fafaf8;
 
-.theme-light {
-  --bg: #f5f3ed;
-  --bg-deep: #ebe8e0;
-  --surface: #fdfcf8;
-  --surface-2: #f7f5ee;
-  --fg: #14171c;
-  --fg-muted: #4d555f;
-  --fg-faint: #7a828c;
-  --line: rgb(20 23 28 / 0.1);
-  --line-strong: rgb(20 23 28 / 0.22);
-  --accent: var(--signal-deep);
+  --fg: #101418;
+  --fg-muted: #687280;
+  --fg-faint: #9aa1ab;
+  --line: rgb(16 20 24 / 0.12);
+  --line-strong: rgb(16 20 24 / 0.26);
+  --accent: var(--signal-deep); /* signal as text/action on paper */
   --accent-ink: #ffffff;
   --error: #c13f2b;
 }
 
+/* graphite context — statement, disciplines, resolution, colophon */
+.theme-dark {
+  --bg: #0c0e11;
+  --bg-deep: #090b0e;
+  --surface: rgb(255 255 255 / 0.04);
+  --fg: #edf0f2;
+  --fg-muted: #9ba3ad;
+  --fg-faint: #626a75;
+  --line: rgb(237 240 242 / 0.1);
+  --line-strong: rgb(237 240 242 / 0.26);
+  --accent: var(--signal);
+  --error: #ff8a6b;
+}
+
 @theme inline {
   --color-bg: var(--bg);
+  --color-bg-warm: var(--bg-warm);
   --color-bg-deep: var(--bg-deep);
+  --color-bg-deeper: var(--bg-deeper);
   --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
   --color-fg: var(--fg);
   --color-fg-muted: var(--fg-muted);
   --color-fg-faint: var(--fg-faint);
@@ -64,11 +67,13 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-signal: var(--signal);
+  --color-signal-deep: var(--signal-deep);
   --color-error: var(--error);
 
-  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", sans-serif;
-  --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument), ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo,
     Consolas, monospace;
 
@@ -85,7 +90,7 @@ html {
 body {
   background-color: var(--bg);
   color: var(--fg);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -115,66 +120,67 @@ body {
 }
 
 /* ------------------------------------------------------- typography
-   Editorial scale. Sentence case everywhere. Contrast comes from
-   size and weight, not from decoration. */
+   Architectural display, editorial body, technical annotation.
+   Sentence case dominates. Contrast comes from scale and weight. */
 
 .display-hero {
   font-family: var(--font-display);
-  font-size: clamp(4.25rem, 13vw, 13.5rem);
-  line-height: 0.84;
-  letter-spacing: -0.045em;
+  font-size: clamp(4.5rem, 13vw, 13rem);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
   font-weight: 600;
 }
 
 .display-xl {
   font-family: var(--font-display);
-  font-size: clamp(2.7rem, 1.6rem + 5vw, 5.9rem);
-  line-height: 0.97;
-  letter-spacing: -0.034em;
+  font-size: clamp(2.6rem, 1.6rem + 4.6vw, 5.6rem);
+  line-height: 1;
+  letter-spacing: -0.032em;
   font-weight: 600;
 }
 
 .display-l {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 1.5rem + 3.2vw, 4rem);
-  line-height: 1.01;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.15rem, 1.5rem + 3vw, 3.9rem);
+  line-height: 1.03;
+  letter-spacing: -0.028em;
   font-weight: 600;
 }
 
 .display-m {
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 1.35rem + 1.5vw, 2.55rem);
-  line-height: 1.08;
-  letter-spacing: -0.024em;
+  font-size: clamp(1.6rem, 1.32rem + 1.4vw, 2.45rem);
+  line-height: 1.1;
+  letter-spacing: -0.022em;
   font-weight: 600;
 }
 
 .type-title {
   font-family: var(--font-display);
-  font-size: clamp(1.16rem, 1.08rem + 0.45vw, 1.42rem);
-  line-height: 1.22;
-  letter-spacing: -0.016em;
+  font-size: clamp(1.14rem, 1.07rem + 0.42vw, 1.4rem);
+  line-height: 1.25;
+  letter-spacing: -0.014em;
   font-weight: 600;
 }
 
 .type-lede {
-  font-size: clamp(1.08rem, 1.01rem + 0.42vw, 1.38rem);
-  line-height: 1.56;
-  letter-spacing: -0.008em;
-  font-weight: 400;
+  font-size: clamp(1.06rem, 1rem + 0.38vw, 1.32rem);
+  line-height: 1.6;
+  letter-spacing: -0.006em;
+  font-weight: 500;
 }
 
 .type-body {
-  font-size: clamp(0.96rem, 0.93rem + 0.18vw, 1.06rem);
-  line-height: 1.7;
+  font-size: clamp(0.95rem, 0.92rem + 0.18vw, 1.05rem);
+  line-height: 1.72;
 }
 
+/* mono is metadata only — never decoration */
 .label-mono,
 .meta-mono {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
+  font-size: 0.66rem;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
@@ -183,8 +189,8 @@ body {
 @media (max-width: 640px) {
   .label-mono,
   .meta-mono {
-    font-size: 0.64rem;
-    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
   }
 }
 
@@ -196,7 +202,7 @@ body {
 }
 
 /* ---------------------------------------------------------- buttons
-   Physical controls. Square, heavy, quiet until used. */
+   Controls are physical: square, exact, quiet until used. */
 
 .btn {
   display: inline-flex;
@@ -204,11 +210,11 @@ body {
   justify-content: center;
   gap: 0.6rem;
   cursor: pointer;
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-family: var(--font-display);
+  font-size: 0.94rem;
   font-weight: 600;
   letter-spacing: 0.005em;
-  padding: 1rem 1.9rem;
+  padding: 1rem 1.85rem;
   transition:
     background-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
     border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -244,9 +250,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  font-size: 0.95rem;
+  font-family: var(--font-display);
+  font-size: 0.94rem;
   font-weight: 600;
-  letter-spacing: 0;
   color: var(--fg);
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--line-strong);
@@ -286,20 +292,64 @@ body {
   border-bottom: 1px solid var(--line);
 }
 
-/* nameplate — the official logo chip (brand asset sits on light) */
+/* nameplate — official logo presentation on non-white grounds */
 .nameplate {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #f5f3ed;
+  background: #ffffff;
   padding: 0.45rem 0.6rem;
+}
+
+/* --------------------------------------------------- specimen plates
+   The documentation frame: hairline enclosure, registration
+   corners, optional drafting grid. Products live here. */
+
+.plate {
+  position: relative;
+  border: 1px solid var(--line-strong);
+}
+
+/* registration corners — the four tick marks of an engineering plate */
+.reg-corners::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--fg-faint), var(--fg-faint)) left top / 14px 1px,
+    linear-gradient(var(--fg-faint), var(--fg-faint)) left top / 1px 14px,
+    linear-gradient(var(--fg-faint), var(--fg-faint)) right top / 14px 1px,
+    linear-gradient(var(--fg-faint), var(--fg-faint)) right top / 1px 14px,
+    linear-gradient(var(--fg-faint), var(--fg-faint)) left bottom / 14px 1px,
+    linear-gradient(var(--fg-faint), var(--fg-faint)) left bottom / 1px 14px,
+    linear-gradient(var(--fg-faint), var(--fg-faint)) right bottom / 14px 1px,
+    linear-gradient(var(--fg-faint), var(--fg-faint)) right bottom / 1px 14px;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+}
+
+/* drafting grid — barely-there, structural */
+.tech-grid {
+  position: relative;
+}
+.tech-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 54px 54px;
+  opacity: 0.05;
 }
 
 /* ------------------------------------------------------------ reveal */
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(18px);
   transition:
     opacity 700ms var(--ease-engineered),
     transform 700ms var(--ease-engineered);
@@ -340,17 +390,17 @@ html:not(.js) [data-draw] circle {
 }
 
 /* ---------------------------------------------- the connection line
-   One physical line begins in the hero and returns at contact.
-   It carries a single travelling signal. */
+   A single drawn path carries the narrative. One travelling pulse,
+   quiet by design. */
 
 .signal-pulse {
   stroke: var(--signal);
-  stroke-dasharray: 110 1500;
-  animation: signal-travel 6.5s linear infinite;
+  stroke-dasharray: 90 1900;
+  animation: signal-travel 9s linear infinite;
 }
 @keyframes signal-travel {
   from {
-    stroke-dashoffset: 1610;
+    stroke-dashoffset: 1990;
   }
   to {
     stroke-dashoffset: 0;
@@ -368,12 +418,12 @@ html:not(.js) .signal-pulse {
 }
 
 .signal-dot {
-  animation: signal-breathe 3s ease-in-out infinite;
+  animation: signal-breathe 3.2s ease-in-out infinite;
 }
 @keyframes signal-breathe {
   0%,
   100% {
-    opacity: 0.55;
+    opacity: 0.5;
   }
   50% {
     opacity: 1;
@@ -387,7 +437,7 @@ html:not(.js) .signal-dot {
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -396,7 +446,7 @@ html:not(.js) .signal-dot {
 }
 .rise-in {
   opacity: 0;
-  animation: rise-in 900ms var(--ease-engineered) forwards;
+  animation: rise-in 850ms var(--ease-engineered) forwards;
   animation-delay: calc(var(--rise-delay, 0) * 1ms);
 }
 html:not(.js) .rise-in {
@@ -404,11 +454,11 @@ html:not(.js) .rise-in {
   animation: none;
 }
 
-/* environment change — product observatory */
+/* environment change — product catalog */
 @keyframes env-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -416,15 +466,14 @@ html:not(.js) .rise-in {
   }
 }
 .env-in {
-  animation: env-in 480ms var(--ease-engineered);
+  animation: env-in 440ms var(--ease-engineered);
 }
 html:not(.js) .env-in {
   animation: none;
 }
 
-/* -------------------------------------------- engineering chambers
-   Three grounds, three behaviors. Pattern layers only — no content
-   decoration. Fiber drifts slowly; copper holds; electro modules. */
+/* ------------------------------------------ discipline row grounds
+   Static, structural texture only. No ambient motion. */
 
 .chamber {
   position: relative;
@@ -436,33 +485,20 @@ html:not(.js) .env-in {
   inset: 0;
   pointer-events: none;
   transition: opacity 500ms var(--ease-engineered);
-  opacity: var(--chamber-opacity, 0.07);
+  opacity: var(--chamber-opacity, 0.05);
 }
 .chamber:hover::before,
 .chamber:focus-within::before {
-  opacity: calc(var(--chamber-opacity, 0.07) * 2);
+  opacity: calc(var(--chamber-opacity, 0.05) * 2.2);
 }
 
 .chamber-fiber::before {
   background-image: repeating-linear-gradient(
     90deg,
     currentColor 0 1px,
-    transparent 1px 30px
+    transparent 1px 34px
   );
-  animation: fiber-drift 22s linear infinite alternate;
-}
-@keyframes fiber-drift {
-  from {
-    background-position-x: 0;
-  }
-  to {
-    background-position-x: 30px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .chamber-fiber::before {
-    animation: none;
-  }
+  --chamber-opacity: 0.05;
 }
 
 .chamber-copper::before {
@@ -470,26 +506,22 @@ html:not(.js) .env-in {
     repeating-linear-gradient(
       45deg,
       currentColor 0 1px,
-      transparent 1px 14px
+      transparent 1px 16px
     ),
     repeating-linear-gradient(
       -45deg,
       currentColor 0 1px,
-      transparent 1px 14px
+      transparent 1px 16px
     );
-  --chamber-opacity: 0.075;
+  --chamber-opacity: 0.055;
 }
 
 .chamber-electro::before {
   background-image:
     linear-gradient(to right, currentColor 1px, transparent 1px),
     linear-gradient(to bottom, currentColor 1px, transparent 1px);
-  background-size: 58px 58px;
-  --chamber-opacity: 0.09;
-}
-
-html:not(.js) .chamber-fiber::before {
-  animation: none;
+  background-size: 62px 62px;
+  --chamber-opacity: 0.06;
 }
 
 /* ----------------------------------------------- navigation states */
@@ -501,10 +533,10 @@ html:not(.js) .chamber-fiber::before {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -4px;
+  bottom: -6px;
   height: 2px;
   width: 100%;
-  background: var(--accent);
+  background: var(--signal);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 240ms var(--ease-engineered);
@@ -515,7 +547,7 @@ html:not(.js) .chamber-fiber::before {
   transform: scaleX(1);
 }
 
-/* product world panel */
+/* product directory panel */
 .world-panel {
   opacity: 0;
   transform: translateY(-10px);
@@ -592,7 +624,7 @@ html:not(.js) .world-panel {
 
 /* active page in the mobile directory — a hard blue edge */
 .dir-row-active {
-  box-shadow: inset 3px 0 0 0 var(--accent);
+  box-shadow: inset 3px 0 0 0 var(--signal);
 }
 
 /* ------------------------------------------------------------- forms */
