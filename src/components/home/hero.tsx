@@ -2,142 +2,118 @@ import Link from "next/link";
 import Image from "next/image";
 import mtpTrunkAssembly from "@/assets/mtp-trunk-assembly.webp";
 
-/* 01 — SIGNAL
-   Cinematic engineering statement. Left: the typographic claim.
-   Right: the approved T&S asset presented as a restrained specimen
-   on a technical stage — stage clips hold the part, an NTS scale
-   bar and site coordinates annotate it like a drawing sheet. A thin
-   signal conductor runs headline → artifact → next section seam;
-   reduced-motion users receive the static conductor only. */
+/* 01 — IDENTITY
+   The opening is architecture: CLEAR / EDGE set at building scale,
+   one physical signal line crossing the composition and terminating
+   at the approved trunk assembly — presented as a large physical
+   artifact, not a card. Night ground. The line that starts here
+   resolves at contact. */
 
 export function Hero() {
   return (
-    <section id="signal" className="relative overflow-hidden bg-bg text-fg" aria-labelledby="hero-heading">
-      <div className="bp-grid absolute inset-0" aria-hidden="true" />
-
-      {/* signal conductor — headline → artifact → next section */}
+    <section className="relative overflow-hidden bg-bg text-fg" aria-labelledby="hero-heading">
+      {/* connection line — enters left, crosses the composition,
+          lands on the artifact */}
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
-        viewBox="0 0 1200 760"
+        className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+        viewBox="0 0 1440 900"
         preserveAspectRatio="none"
         fill="none"
       >
         <path
-          className="conductor-base"
-          d="M32 600 H340 A8 8 0 0 0 348 592 V256 A8 8 0 0 1 356 248 H952 L1032 328 V760"
+          d="M-8 470 H560 C640 470 660 430 760 430 H1006"
+          stroke="var(--line-strong)"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />
         <path
-          className="conductor-pulse"
-          d="M32 600 H340 A8 8 0 0 0 348 592 V256 A8 8 0 0 1 356 248 H952 L1032 328 V760"
-          strokeWidth="1.5"
+          d="M-8 470 H560 C640 470 660 430 760 430 H1006"
+          stroke="var(--signal)"
+          strokeWidth="1.75"
           vectorEffect="non-scaling-stroke"
+          className="signal-pulse"
         />
-        <path
-          className="conductor-pulse conductor-pulse-2"
-          d="M32 600 H340 A8 8 0 0 0 348 592 V256 A8 8 0 0 1 356 248 H952 L1032 328 V760"
-          strokeWidth="1.5"
-          vectorEffect="non-scaling-stroke"
-        />
+        <circle cx="1006" cy="430" r="4" fill="var(--signal)" className="signal-dot" />
       </svg>
 
-      <div className="relative mx-auto grid max-w-[84rem] gap-14 px-5 pb-20 pt-32 md:px-10 md:pb-28 md:pt-44 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-12">
-        {/* statement */}
+      <div className="relative mx-auto grid min-h-[92svh] max-w-[88rem] items-center gap-14 px-5 pb-16 pt-32 md:px-10 md:pt-40 lg:grid-cols-[1.12fr_0.88fr] lg:gap-10">
+        {/* identity */}
         <div>
-          <p className="label-mono flex flex-wrap items-center gap-x-4 gap-y-2 text-fg-faint hero-rise" style={{ "--hero-delay": 0 } as React.CSSProperties}>
-            <span className="text-accent">ClearEdge Solutions</span>
-            <span aria-hidden="true" className="h-[1px] w-8 bg-line-strong" />
-            <span>San Jose, California</span>
+          <p className="label-mono text-fg-faint rise-in" style={{ "--rise-delay": 0 } as React.CSSProperties}>
+            ClearEdge Solutions · San Jose, California
           </p>
 
-          <h1
-            id="hero-heading"
-            className="type-hero mt-8 hero-rise"
-            style={{ "--hero-delay": 90 } as React.CSSProperties}
-          >
-            Engineered for the connection&nbsp;between.
+          <h1 id="hero-heading" className="mt-8 select-none">
+            <span
+              aria-hidden="true"
+              className="display-hero block rise-in"
+              style={{ "--rise-delay": 80 } as React.CSSProperties}
+            >
+              Clear
+            </span>
+            <span
+              aria-hidden="true"
+              className="display-hero block rise-in"
+              style={{ "--rise-delay": 180 } as React.CSSProperties}
+            >
+              Edge<span className="text-signal">.</span>
+            </span>
+            <span className="sr-only">ClearEdge Solutions</span>
           </h1>
 
           <p
-            className="type-lede measure mt-8 max-w-xl text-fg-muted hero-rise"
-            style={{ "--hero-delay": 180 } as React.CSSProperties}
+            className="type-lede mt-10 max-w-xl text-fg-muted rise-in"
+            style={{ "--rise-delay": 300 } as React.CSSProperties}
           >
-            ClearEdge Solutions designs and manufactures high performance
-            fiber optic and copper cabling systems and electro-mechanical
-            assemblies — built around your requirements, not a catalogue.
+            Engineered connectivity between the requirement and the running
+            system — high performance fiber optic and copper cabling systems
+            and electro-mechanical assemblies, built around your requirements.
           </p>
 
           <div
-            className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5 hero-rise"
-            style={{ "--hero-delay": 260 } as React.CSSProperties}
+            className="mt-11 flex flex-wrap items-center gap-x-9 gap-y-5 rise-in"
+            style={{ "--rise-delay": 400 } as React.CSSProperties}
           >
             <Link href="/contact#quote-form" className="btn btn-primary">
-              Request a Quote
+              Request a quote
             </Link>
             <Link href="/products" className="text-link">
-              Explore Products
+              Explore products
               <svg className="text-link-arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                 <path d="M0 5h12M8 1l4 4-4 4" />
               </svg>
             </Link>
           </div>
-
-          {/* slogan strip — the company line, stated once */}
-          <p
-            aria-hidden="true"
-            className="label-mono mt-14 hidden !text-[0.62rem] text-fg-faint sm:flex sm:items-center sm:gap-4 hero-rise"
-            style={{ "--hero-delay": 340 } as React.CSSProperties}
-          >
-            <span className="text-accent">Your Partner For Connectivity</span>
-            <span aria-hidden="true" className="h-[1px] w-8 bg-line-strong" />
-            <span>37.35°N&nbsp;121.95°W</span>
-          </p>
         </div>
 
-        {/* artifact — specimen stage */}
-        <figure className="plate reg-corners p-5 md:p-6 hero-rise" style={{ "--hero-delay": 220 } as React.CSSProperties}>
-          <figcaption className="plate-head">
-            <span className="label-mono !text-[0.62rem] text-fg-faint">FIG. 01</span>
-            <span className="label-mono !text-[0.62rem] text-fg-faint">APPROVED ASSET</span>
-          </figcaption>
-
-          <div className="relative pt-4">
+        {/* the artifact */}
+        <figure
+          className="relative rise-in lg:-mr-[calc((100vw-88rem)/2-2.5rem)] xl:-mr-10"
+          style={{ "--rise-delay": 260 } as React.CSSProperties}
+        >
+          <div className="overflow-hidden border border-line-strong bg-surface">
             <Image
               src={mtpTrunkAssembly}
               alt="Multi-fiber trunk cable assembly with an aqua jacket and MPO-style connectors"
               priority
-              sizes="(max-width: 1024px) 100vw, 520px"
-              className="h-auto w-full object-contain"
+              sizes="(max-width: 1024px) 100vw, 560px"
+              className="h-auto w-full object-cover"
             />
-            {/* specimen stage clips */}
-            <span aria-hidden="true" className="absolute left-0 top-[24%] h-5 w-2.5 border-y border-l border-line-strong" />
-            <span aria-hidden="true" className="absolute left-0 bottom-[18%] h-5 w-2.5 border-y border-l border-line-strong" />
-            <span aria-hidden="true" className="absolute right-0 top-[24%] h-5 w-2.5 border-y border-r border-line-strong" />
-            <span aria-hidden="true" className="absolute right-0 bottom-[18%] h-5 w-2.5 border-y border-r border-line-strong" />
           </div>
-
-          {/* NTS scale bar + site stamp */}
-          <div aria-hidden="true" className="mt-4 flex items-center justify-between gap-6">
-            <span className="flex items-center gap-2 text-line-strong">
-              <svg width="88" height="9" viewBox="0 0 88 9" fill="none" stroke="currentColor" strokeWidth="1">
-                <path d="M0.5 0v9M22.5 3v6M44.5 0v9M66.5 3v6M87.5 0v9M0.5 8.5h87" />
-              </svg>
-              <span className="label-mono !text-[0.56rem] text-fg-faint">NTS</span>
-            </span>
-            <span className="label-mono !text-[0.56rem] text-fg-faint">SAN JOSE · CA 95131</span>
-          </div>
-
-          <div className="plate-foot mt-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-            <span className="label-mono !text-[0.68rem] !tracking-[0.16em] text-fg">
-              MULTI-FIBER TRUNK ASSEMBLY
-            </span>
-            <span className="label-mono !text-[0.62rem] text-accent">
-              FAMILY&nbsp;01&nbsp;/&nbsp;03
-            </span>
-          </div>
+          <figcaption className="mt-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+            <span className="text-sm font-medium">Multi-fiber trunk assembly</span>
+            <span className="label-mono !text-[0.6rem] text-fg-faint">Fiber optic · approved photography</span>
+          </figcaption>
         </figure>
+      </div>
+
+      {/* ground strip */}
+      <div className="relative mx-auto flex max-w-[88rem] flex-wrap items-center justify-between gap-x-8 gap-y-3 px-5 pb-9 md:px-10">
+        <p className="text-sm font-medium text-fg-muted">{`Your Partner For Connectivity.`}</p>
+        <p className="label-mono !text-[0.62rem] text-fg-faint" aria-hidden="true">
+          37.35°N 121.95°W
+        </p>
       </div>
     </section>
   );

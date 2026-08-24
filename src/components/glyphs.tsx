@@ -1,116 +1,80 @@
-/* Original technical glyphs for The Connectivity Architecture.
-   One line grammar throughout: 1.5px strokes, square junctions,
-   a single signal-blue node where a connection lands. */
+/* Original abstract visualizations for The Connection Infrastructure.
+   These are deliberately NOT product depictions — they are spatial
+   compositions expressing how each family behaves as infrastructure.
+   No specifications, no measurements, nothing unverifiable. */
 
 type GlyphProps = { className?: string };
 
-export function SourceGlyph({ className = "" }: GlyphProps) {
+/* Copper: dense structured geometry — conductors laying across each
+   other in an ordered bundle, one strand carrying the signal. */
+export function CopperComposition({ className = "" }: GlyphProps) {
   return (
-    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      <rect x="6" y="17" width="14" height="14" />
-      <path d="M20 24h16" />
-      <path d="M36 18v12" />
-      <circle cx="36" cy="24" r="2.2" fill="currentColor" stroke="none" />
+    <svg viewBox="0 0 640 480" fill="none" className={className} aria-hidden="true">
+      <g stroke="currentColor" strokeWidth="1.25" opacity="0.5">
+        <path d="M40 120C160 120 180 168 320 168s160-48 280-48" />
+        <path d="M40 176c120 0 140 44 280 44s160-44 280-44" />
+        <path d="M40 232h240c56 0 64 36 128 36h192" />
+        <path d="M40 288c96 0 112-40 208-40h112c72 0 88 52 240 52" />
+        <path d="M40 344c120 0 148 40 268 40s132-24 292-24" opacity="0.7" />
+      </g>
+      {/* insulation sheaths entering from the left */}
+      <g stroke="currentColor" strokeWidth="1.25">
+        <rect x="24" y="104" width="34" height="30" />
+        <rect x="24" y="158" width="34" height="30" />
+        <rect x="24" y="216" width="34" height="30" />
+        <rect x="24" y="272" width="34" height="30" />
+        <rect x="24" y="330" width="34" height="30" />
+      </g>
+      {/* termination block on the right */}
+      <rect x="584" y="96" width="34" height="290" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M600 118v246M592 130v222" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+      {/* the signal strand */}
+      <path
+        d="M40 232h240c56 0 64 36 128 36h192"
+        stroke="#0092fc"
+        strokeWidth="1.75"
+      />
+      <circle cx="601" cy="268" r="4" fill="#0092fc" />
     </svg>
   );
 }
 
-export function FiberGlyph({ className = "" }: GlyphProps) {
+/* Electro-mechanical: box / assembly / modular geometry — a chassis,
+   plug-in modules on rails, ports, and an internal harness. */
+export function BoxComposition({ className = "" }: GlyphProps) {
   return (
-    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      <path d="M4 16h18l8 8h14" />
-      <path d="M4 24h18l6 6h16" />
-      <path d="M4 32h18l-4 4" opacity="0.45" />
-      <circle cx="44" cy="30" r="2.2" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-export function CopperGlyph({ className = "" }: GlyphProps) {
-  return (
-    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      <rect x="4" y="19" width="9" height="10" />
-      <rect x="35" y="19" width="9" height="10" />
-      <path d="M13 22c6 0 6 4 11 4s5-4 11-4" />
-      <path d="M13 27c6 0 6-4 11-4s5 4 11 4" />
-      <circle cx="39.5" cy="24" r="1.8" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-export function ElectroGlyph({ className = "" }: GlyphProps) {
-  return (
-    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      <rect x="7" y="7" width="34" height="34" />
-      <path d="M13 15h9M13 21h9M13 27h9" />
-      <path d="M31 33V19" />
-      <circle cx="31" cy="33" r="2.2" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-export function ApplicationGlyph({ className = "" }: GlyphProps) {
-  return (
-    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      <circle cx="24" cy="24" r="3.5" />
-      <path d="M24 20.5V8M26.5 26l10 10M21.5 26l-10 10M27.5 22.5 38 17" />
-    </svg>
-  );
-}
-
-/* ---- schematic drawings for product plates (clearly diagrams,
-       never stand-in photography) -------------------------------- */
-
-export function CopperSchematic({ className = "" }: GlyphProps) {
-  return (
-    <svg viewBox="0 0 320 200" fill="none" stroke="currentColor" strokeWidth="1.25" className={className} aria-hidden="true">
-      <rect x="18" y="58" width="52" height="84" rx="1" />
-      <path d="M28 74h32M28 88h32M28 102h32M28 116h32" opacity="0.5" />
-      <path d="M70 78c40 0 60 10 90 10s50-10 90-10" />
-      <path d="M70 100c40 0 60-8 90-8s50 8 90 8" />
-      <path d="M70 122c40 0 60 6 90 6s50-6 90-6" opacity="0.55" />
-      <rect x="250" y="58" width="52" height="84" rx="1" />
-      <path d="M260 74h32M260 88h32M260 102h32M260 116h32" opacity="0.5" />
-      <circle cx="160" cy="110" r="2.5" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-export function BoxSchematic({ className = "" }: GlyphProps) {
-  return (
-    <svg viewBox="0 0 320 200" fill="none" stroke="currentColor" strokeWidth="1.25" className={className} aria-hidden="true">
-      <path d="M96 42l64-22 96 26v96l-96 34-64-22z" />
-      <path d="M96 42l96 26 64-22" opacity="0.6" />
-      <path d="M192 68v108" opacity="0.35" />
-      <rect x="118" y="86" width="46" height="12" />
-      <rect x="118" y="106" width="46" height="12" opacity="0.55" />
-      <path d="M164 92h56" />
-      <path d="M220 92v34" opacity="0.6" />
-      <circle cx="164" cy="92" r="2.5" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-/* trunk-and-drop topology — one continuous trunk, engineered drops,
-   a single signal node where the connection lands */
-export function TrunkDropGlyph({ className = "" }: GlyphProps) {
-  const drops = [180, 330, 480, 630, 780];
-  return (
-    <svg viewBox="0 0 900 130" fill="none" stroke="currentColor" strokeWidth="1.25" className={className} aria-hidden="true">
-      {/* feed terminal */}
-      <rect x="14" y="34" width="11" height="11" />
-      <path d="M25 40H872" strokeWidth="1.5" />
-      {/* drops */}
-      {drops.map((x) => (
-        <g key={x}>
-          <path d={`M${x} 40V104`} />
-          <rect x={x - 5} y="104" width="10" height="10" fill="var(--bg)" />
-        </g>
-      ))}
-      {/* the landed connection */}
-      <circle cx="480" cy="40" r="3.2" fill="#0092fc" stroke="none" />
-      {/* far-end terminal */}
-      <path d="M872 34v11" strokeWidth="1.5" />
+    <svg viewBox="0 0 640 480" fill="none" className={className} aria-hidden="true">
+      {/* chassis */}
+      <rect x="92" y="72" width="456" height="336" stroke="currentColor" strokeWidth="1.5" />
+      {/* module rails */}
+      <g stroke="currentColor" strokeWidth="1" opacity="0.45">
+        <path d="M116 136h408M116 224h408M116 312h408" />
+      </g>
+      {/* plug-in modules at different depths of insertion */}
+      <rect x="140" y="98" width="150" height="38" stroke="currentColor" strokeWidth="1.25" />
+      <rect x="310" y="186" width="190" height="38" stroke="currentColor" strokeWidth="1.25" />
+      <rect x="140" y="274" width="106" height="38" stroke="currentColor" strokeWidth="1.25" />
+      <rect x="398" y="274" width="102" height="38" stroke="currentColor" strokeWidth="1.25" opacity="0.55" />
+      {/* connector ports along the face */}
+      <g stroke="currentColor" strokeWidth="1.25">
+        <rect x="140" y="352" width="26" height="20" />
+        <rect x="178" y="352" width="26" height="20" />
+        <rect x="216" y="352" width="26" height="20" />
+      </g>
+      <g stroke="currentColor" strokeWidth="1.25" opacity="0.55">
+        <rect x="430" y="352" width="70" height="20" />
+      </g>
+      {/* internal harness between modules and ports */}
+      <path
+        d="M215 117c60 0 40 88 95 88M500 205c-40 40-90 10-140 50s-80 78-124 92"
+        stroke="currentColor"
+        strokeWidth="1"
+        opacity="0.4"
+        strokeDasharray="3 5"
+      />
+      {/* the live connection */}
+      <rect x="310" y="186" width="190" height="38" stroke="#0092fc" strokeWidth="1.75" fill="none" />
+      <circle cx="405" cy="205" r="4" fill="#0092fc" />
     </svg>
   );
 }

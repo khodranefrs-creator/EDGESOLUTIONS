@@ -1,25 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Manrope, IBM_Plex_Mono } from "next/font/google";
+import { Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import { company } from "@/lib/site";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
-/* Typography of The Connectivity Architecture:
-   — Sora carries the statements (architectural, contemporary)
-   — Manrope carries the explanations
-   — IBM Plex Mono is the technical voice: figures, indexes, labels */
-const sora = Sora({
+/* Typography of The Connection Infrastructure:
+   — Instrument Sans carries everything: display statements and body,
+     editorial and industrial, sentence case
+   — IBM Plex Mono only where information is genuinely technical */
+const instrument = Instrument_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-sora",
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope",
+  variable: "--font-instrument",
   display: "swap",
 });
 
@@ -79,7 +72,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${manrope.variable} ${plexMono.variable}`}
+      className={`${instrument.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <head>

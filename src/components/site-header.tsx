@@ -8,15 +8,16 @@ import { company, navItems, productFamilies } from "@/lib/site";
 import mainlogo from "@/assets/mainlogo.png";
 
 /* ------------------------------------------------------------------ */
-/* Minimal fixed header. Desktop: technical mega-directory under       */
-/* Products (hover/focus opens, click toggles, Escape closes and       */
-/* returns focus). Mobile: full-screen indexed directory with          */
-/* staggered entrance, focus trap and direct-lines block.              */
+/* Navigation of The Connection Infrastructure.                        */
+/* Desktop: a quiet bar; Products opens the Product World — a bright   */
+/* environment where the three families stand at full scale.           */
+/* Mobile: an independently designed full-screen company directory     */
+/* with generous typography, product discovery and direct lines.       */
 /* ------------------------------------------------------------------ */
 
-function Logo({ className = "" }: { className?: string }) {
+function Logo() {
   return (
-    <span className={`nameplate ${className}`}>
+    <span className="nameplate">
       <Image
         src={mainlogo}
         alt="ClearEdge Solutions"
@@ -31,11 +32,12 @@ function Logo({ className = "" }: { className?: string }) {
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
+  const [worldOpen, setWorldOpen] = useState(false);
+  const [disclosed, setDisclosed] = useState(true);
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const megaTriggerRef = useRef<HTMLButtonElement>(null);
-  const megaWrapRef = useRef<HTMLLIElement>(null);
+  const worldTriggerRef = useRef<HTMLButtonElement>(null);
+  const worldWrapRef = useRef<HTMLDivElement>(null);
   /* Escape closes and refocuses the trigger; without this guard the
      resulting focus event would instantly re-open the panel. */
   const suppressFocusOpen = useRef(false);
@@ -44,10 +46,10 @@ export function SiteHeader() {
 
   useEffect(() => {
     setOpen(false);
-    setMegaOpen(false);
+    setWorldOpen(false);
   }, [pathname]);
 
-  /* mobile menu: scroll lock + initial focus + Escape + tab trap */
+  /* mobile directory: scroll lock + initial focus + Escape + tab trap */
   useEffect(() => {
     if (!open) return;
     document.documentElement.style.overflow = "hidden";
@@ -80,15 +82,15 @@ export function SiteHeader() {
     };
   }, [open]);
 
-  /* mega panel: Escape closes; focus leaving the wrap closes it */
+  /* product world: Escape closes; focus leaving the wrap closes it */
   useEffect(() => {
-    if (!megaOpen) return;
-    const wrap = megaWrapRef.current;
+    if (!worldOpen) return;
+    const wrap = worldWrapRef.current;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setMegaOpen(false);
+        setWorldOpen(false);
         suppressFocusOpen.current = true;
-        megaTriggerRef.current?.focus();
+        worldTriggerRef.current?.focus();
         setTimeout(() => {
           suppressFocusOpen.current = false;
         }, 50);
@@ -96,7 +98,7 @@ export function SiteHeader() {
     };
     const onFocusOut = (e: FocusEvent) => {
       if (!wrap || !wrap.contains(e.relatedTarget as Node)) {
-        setMegaOpen(false);
+        setWorldOpen(false);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -105,7 +107,7 @@ export function SiteHeader() {
       window.removeEventListener("keydown", onKey);
       wrap?.removeEventListener("focusout", onFocusOut);
     };
-  }, [megaOpen]);
+  }, [worldOpen]);
 
   const closeAndReturnFocus = useCallback(() => {
     setOpen(false);
@@ -121,8 +123,11 @@ export function SiteHeader() {
         Skip to content
       </a>
 
-      <header className="site-header fixed inset-x-0 top-0 z-50 bg-bg text-fg">
-        <div className="mx-auto flex h-16 max-w-[84rem] items-center justify-between px-5 md:h-[4.5rem] md:px-10">
+      <header
+        className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg text-fg"
+        onMouseLeave={() => setWorldOpen(false)}
+      >
+        <div className="mx-auto flex h-16 max-w-[88rem] items-center justify-between px-5 md:h-[4.5rem] md:px-10">
           <Link
             href="/"
             className="flex shrink-0 items-center transition-opacity duration-200 hover:opacity-85"
@@ -134,102 +139,27 @@ export function SiteHeader() {
           {/* desktop navigation */}
           <nav aria-label="Primary" className="hidden lg:block">
             <ul className="flex items-center gap-9">
-              {/* Products — mega-directory trigger; the panel is a DOM
-                  sibling of the button so keyboard order enters it first */}
-              <li
-                ref={megaWrapRef}
-                onMouseEnter={() => setMegaOpen(true)}
-                onMouseLeave={() => setMegaOpen(false)}
-              >
+              <li className="relative">
                 <button
-                  ref={megaTriggerRef}
+                  ref={worldTriggerRef}
                   type="button"
-                  onClick={() => setMegaOpen((v) => !v)}
+                  onClick={() => setWorldOpen(true)}
                   onFocus={() => {
                     if (suppressFocusOpen.current) return;
-                    setMegaOpen(true);
+                    setWorldOpen(true);
                   }}
-                  aria-expanded={megaOpen}
-                  aria-controls="products-mega"
-                  className={`nav-link label-mono flex items-center gap-2 py-2 transition-colors duration-150 hover:text-accent ${
-                    productsActive ? "text-accent" : "text-fg-muted"
+                  onMouseEnter={() => setWorldOpen(true)}
+                  aria-expanded={worldOpen}
+                  aria-controls="products-world"
+                  data-open={worldOpen}
+                  className={`nav-link py-2 font-medium transition-colors duration-150 ${
+                    productsActive || worldOpen
+                      ? "text-accent"
+                      : "text-fg-muted hover:text-accent"
                   }`}
                 >
                   Products
-                  <svg
-                    width="9"
-                    height="6"
-                    viewBox="0 0 9 6"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.25"
-                    aria-hidden="true"
-                    className={`transition-transform duration-200 ${megaOpen ? "rotate-180" : ""}`}
-                  >
-                    <path d="M1 1l3.5 3.5L8 1" />
-                  </svg>
                 </button>
-
-                <div
-                  id="products-mega"
-                  data-open={megaOpen}
-                  className="mega-wrap relative hidden lg:block"
-                >
-                  <div
-                    className="mega-panel fixed inset-x-0 top-16 border-b border-line bg-surface text-fg md:top-[4.5rem]"
-                    role="group"
-                    aria-label="Product directory"
-                  >
-                    <div className="mx-auto flex max-w-[84rem] items-center justify-between px-5 pb-4 pt-6 md:px-10">
-                      <p className="label-mono !text-[0.6rem] text-fg-faint">Product directory</p>
-                      <p className="label-mono !text-[0.6rem] text-fg-faint">03 families</p>
-                    </div>
-                    <ol className="mx-auto grid max-w-[84rem] gap-px bg-line pb-px md:grid-cols-[1fr_1fr_1fr_0.9fr]">
-                      {productFamilies.map((family) => (
-                        <li key={family.id}>
-                          <Link
-                            href={`/products#${family.id}`}
-                            onClick={() => setMegaOpen(false)}
-                            className="mega-item group flex h-full flex-col gap-3 border-b border-line bg-surface p-8 transition-colors duration-200 hover:bg-bg md:border-b-0 md:p-9"
-                          >
-                            <span className="label-mono !text-[0.62rem] text-accent">
-                              {family.index}
-                            </span>
-                            <span className="flex items-start justify-between gap-4">
-                              <span className="type-title">{family.name}</span>
-                              <svg
-                                className="mega-arrow mt-1 shrink-0 text-accent"
-                                width="18"
-                                height="14"
-                                viewBox="0 0 14 10"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                aria-hidden="true"
-                              >
-                                <path d="M0 5h12M8 1l4 4-4 4" />
-                              </svg>
-                            </span>
-                            <span className="text-sm leading-relaxed text-fg-muted">
-                              {family.tagline}.
-                            </span>
-                          </Link>
-                        </li>
-                      ))}
-                      <li className="flex flex-col justify-between gap-8 border-t border-line bg-bg p-8 md:border-l md:border-t-0 md:p-9">
-                        <p className="label-mono !text-[0.62rem] leading-relaxed text-fg-faint">
-                          Engineered around your requirements — not a fixed catalogue.
-                        </p>
-                        <Link href="/products" onClick={() => setMegaOpen(false)} className="text-link w-fit">
-                          All products
-                          <svg className="text-link-arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                            <path d="M0 5h12M8 1l4 4-4 4" />
-                          </svg>
-                        </Link>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
               </li>
               {navItems.map((item) => {
                 const active = pathname.startsWith(item.href);
@@ -238,7 +168,7 @@ export function SiteHeader() {
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`nav-link label-mono py-2 transition-colors duration-150 hover:text-accent ${
+                      className={`nav-link py-2 font-medium transition-colors duration-150 hover:text-accent ${
                         active ? "text-accent" : "text-fg-muted"
                       }`}
                     >
@@ -253,16 +183,16 @@ export function SiteHeader() {
           <div className="flex items-center gap-3">
             <Link
               href="/contact#quote-form"
-              className="btn btn-primary hidden md:inline-flex !py-3 !text-[0.7rem]"
+              className="btn btn-primary hidden !px-5 !py-3 !text-sm md:inline-flex"
             >
-              Request a Quote
+              Request a quote
             </Link>
             <button
               ref={triggerRef}
               type="button"
               onClick={() => setOpen(true)}
               aria-expanded={open}
-              aria-controls="mobile-menu"
+              aria-controls="mobile-directory"
               className="flex h-11 w-11 items-center justify-center border border-line-strong text-fg transition-colors hover:border-accent hover:text-accent lg:hidden"
             >
               <span className="sr-only">Open menu</span>
@@ -272,19 +202,71 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
+
+        {/* ------------------------------ the product world (desktop) */}
+        <div id="products-world" data-open={worldOpen} ref={worldWrapRef} className="world-wrap absolute inset-x-0 top-full hidden lg:block">
+          <div className="world-panel theme-light border-b border-line-strong bg-bg text-fg shadow-[0_30px_60px_rgba(7,8,10,0.35)]">
+            <div className="mx-auto max-w-[88rem] px-10 pb-10 pt-9">
+              <p className="label-mono !text-[0.62rem] text-fg-faint">Product World</p>
+              <ul className="mt-6">
+                {productFamilies.map((family) => (
+                  <li key={family.id} className="border-t border-line first:border-t-0">
+                    <Link
+                      href={`/products#${family.id}`}
+                      onClick={() => setWorldOpen(false)}
+                      className="world-item group flex flex-wrap items-baseline justify-between gap-x-10 gap-y-2 py-6"
+                    >
+                      <span className="font-display text-[clamp(2rem,3.4vw,3.6rem)] font-semibold leading-none tracking-tight transition-colors duration-200 group-hover:text-accent">
+                        {family.name}
+                      </span>
+                      <span className="flex items-center gap-8">
+                        <span className="max-w-xs text-right text-sm leading-relaxed text-fg-muted">
+                          {family.tagline}.
+                        </span>
+                        <svg
+                          className="world-arrow shrink-0 text-accent"
+                          width="26"
+                          height="16"
+                          viewBox="0 0 26 16"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.75"
+                          aria-hidden="true"
+                        >
+                          <path d="M0 8h23M17 1l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-2 flex items-center justify-between border-t border-line pt-5">
+                <p className="max-w-md text-sm leading-relaxed text-fg-muted">
+                  Engineered around your requirements — not a fixed catalogue.
+                </p>
+                <Link href="/products" onClick={() => setWorldOpen(false)} className="text-link">
+                  Open the observatory
+                  <svg className="text-link-arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                    <path d="M0 5h12M8 1l4 4-4 4" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
-      {/* mobile navigation */}
+      {/* ------------------------------ mobile company directory */}
       <div
-        id="mobile-menu"
+        id="mobile-directory"
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label="Site menu"
         hidden={!open}
-        className="fixed inset-0 z-[60] flex flex-col bg-bg text-fg"
+        className="theme-light fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-bg text-fg"
       >
-        <div className="flex h-16 items-center justify-between px-5 hairline-b md:px-10">
+        <div className="sticky top-0 z-[1] flex h-16 items-center justify-between border-b border-line bg-bg px-5 md:px-10">
           <Link
             href="/"
             onClick={closeAndReturnFocus}
@@ -307,109 +289,126 @@ export function SiteHeader() {
 
         <nav
           aria-label="Mobile"
-          className="menu-enter flex flex-1 flex-col overflow-y-auto px-5 pt-2 md:px-10 [padding-bottom:max(2.5rem,env(safe-area-inset-bottom))]"
+          className="menu-enter flex flex-1 flex-col px-5 pt-4 md:px-10 [padding-bottom:max(2.5rem,env(safe-area-inset-bottom))]"
         >
-          <ul className="flex flex-col">
-            {[{ href: "/", label: "Home", n: "00" }, ...navItems.map((item, i) => ({ ...item, n: String(i + 1).padStart(2, "0") }))].map(
-              (item) => {
-                const active =
-                  item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-                const isProducts = item.href === "/products";
-                return (
-                  <li key={item.href} className="hairline-b">
+          <ul>
+            {[{ href: "/", label: "Home" }, ...navItems].map((item) => {
+              const active =
+                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              const isProducts = item.href === "/products";
+              return (
+                <li key={item.href} className={`border-b border-line ${active ? "dir-row-active" : ""}`}>
+                  {isProducts ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setDisclosed((v) => !v)}
+                        aria-expanded={disclosed}
+                        aria-controls="directory-products"
+                        className={`flex min-h-[3.75rem] w-full items-center justify-between gap-6 py-4 pr-2 ${
+                          active ? "text-accent" : ""
+                        }`}
+                      >
+                        <span className="font-display text-[1.85rem] font-semibold leading-tight tracking-tight">
+                          Products
+                        </span>
+                        <svg
+                          width="16"
+                          height="10"
+                          viewBox="0 0 16 10"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.75"
+                          aria-hidden="true"
+                          className={`shrink-0 transition-transform duration-300 ${disclosed ? "rotate-180" : ""}`}
+                        >
+                          <path d="M1 1l7 7 7-7" />
+                        </svg>
+                      </button>
+                      <div id="directory-products" className="directory-disclosure" data-open={disclosed}>
+                        <div>
+                          <ul className="pb-5 pl-1">
+                            {productFamilies.map((family) => (
+                              <li key={family.id}>
+                                <Link
+                                  href={`/products#${family.id}`}
+                                  onClick={() => setOpen(false)}
+                                  className="flex min-h-[2.9rem] items-center gap-3 py-2 text-[1.05rem] font-medium text-fg-muted transition-colors hover:text-accent"
+                                >
+                                  <span aria-hidden="true" className="h-[6px] w-[6px] shrink-0 bg-accent" />
+                                  {family.name}
+                                </Link>
+                              </li>
+                            ))}
+                            <li>
+                              <Link
+                                href="/products"
+                                onClick={() => setOpen(false)}
+                                className="flex min-h-[2.9rem] items-center py-2 text-sm text-fg-faint underline decoration-line-strong underline-offset-4 transition-colors hover:text-accent"
+                              >
+                                Open the full observatory
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
                       aria-current={active ? "page" : undefined}
-                      className={`group relative flex min-h-[3.75rem] items-center justify-between gap-6 py-4 pl-5 ${
-                        active ? "menu-row-active" : ""
+                      className={`flex min-h-[3.75rem] items-center justify-between gap-6 py-4 pr-2 transition-colors hover:text-accent ${
+                        active ? "text-accent" : ""
                       }`}
                     >
-                      <span className="flex items-baseline gap-4">
-                        <span
-                          className={`label-mono !text-[0.58rem] ${
-                            active ? "text-accent" : "text-fg-faint"
-                          }`}
-                          aria-hidden="true"
-                        >
-                          {item.n}
-                        </span>
-                        <span
-                          className={`font-display text-[1.65rem] font-semibold leading-none tracking-tight transition-colors group-focus-visible:text-accent group-hover:text-accent ${
-                            active ? "text-accent" : ""
-                          }`}
-                        >
-                          {item.label}
-                        </span>
+                      <span className="font-display text-[1.85rem] font-semibold leading-tight tracking-tight">
+                        {item.label}
                       </span>
-                      <span className="label-mono !text-[0.56rem] text-fg-faint" aria-hidden="true">
-                        {isProducts ? "03 FAMILIES" : ""}
-                      </span>
+                      {active ? (
+                        <span aria-hidden="true" className="h-[7px] w-[7px] shrink-0 bg-accent" />
+                      ) : null}
                     </Link>
-
-                    {/* v2: the product directory travels inside the menu */}
-                    {isProducts ? (
-                      <div className="pb-4 pl-5">
-                        <p className="label-mono !text-[0.54rem] text-fg-faint">
-                          Product directory
-                        </p>
-                        <ul className="mt-1 border-l border-line">
-                          {productFamilies.map((family) => (
-                            <li key={family.id}>
-                              <Link
-                                href={`/products#${family.id}`}
-                                onClick={() => setOpen(false)}
-                                className="flex min-h-[2.75rem] items-baseline gap-3 py-2 pl-4 text-sm text-fg-muted transition-colors hover:text-accent focus-visible:text-accent"
-                              >
-                                <span className="label-mono !text-[0.54rem] text-accent">
-                                  {family.index}
-                                </span>
-                                {family.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
-                  </li>
-                );
-              },
-            )}
+                  )}
+                </li>
+              );
+            })}
           </ul>
 
           <Link
             href="/contact#quote-form"
             onClick={() => setOpen(false)}
-            className="btn btn-primary mt-8 w-full"
+            className="btn btn-primary mt-9 w-full"
           >
-            Request a Quote
+            Request a quote
           </Link>
 
           {/* direct lines */}
-          <div className="mt-8">
+          <div className="mt-9">
             <p className="label-mono !text-[0.62rem] text-fg-faint">Direct lines</p>
-            <ul className="mt-3 border-t border-line">
+            <ul className="mt-3">
               <li className="border-b border-line">
-                <a href={`tel:${company.phoneHref}`} className="group flex min-h-[3.5rem] items-center justify-between gap-6 py-3">
-                  <span className="label-mono shrink-0 !text-[0.62rem] text-fg-faint transition-colors group-hover:text-accent">Call</span>
-                  <span className="text-right text-sm font-medium">{company.phone}</span>
+                <a href={`tel:${company.phoneHref}`} className="flex min-h-[3.25rem] items-center justify-between gap-6 py-3 transition-colors hover:text-accent">
+                  <span className="label-mono shrink-0 !text-[0.6rem] text-fg-faint">Call</span>
+                  <span className="text-right text-base font-semibold">{company.phone}</span>
                 </a>
               </li>
               <li className="border-b border-line">
-                <a href={`mailto:${company.email}`} className="group flex min-h-[3.5rem] items-center justify-between gap-6 py-3">
-                  <span className="label-mono shrink-0 !text-[0.62rem] text-fg-faint transition-colors group-hover:text-accent">Email</span>
-                  <span className="text-right text-sm font-medium">{company.email}</span>
+                <a href={`mailto:${company.email}`} className="flex min-h-[3.25rem] items-center justify-between gap-6 py-3 transition-colors hover:text-accent">
+                  <span className="label-mono shrink-0 !text-[0.6rem] text-fg-faint">Email</span>
+                  <span className="break-all text-right text-base font-semibold">{company.email}</span>
                 </a>
               </li>
               <li className="border-b border-line">
-                <div className="flex min-h-[3.5rem] items-center justify-between gap-6 py-3">
-                  <span className="label-mono shrink-0 !text-[0.62rem] text-fg-faint">Visit</span>
-                  <span className="text-right text-sm font-medium">
+                <div className="flex min-h-[3.25rem] items-center justify-between gap-6 py-3">
+                  <span className="label-mono shrink-0 !text-[0.6rem] text-fg-faint">Visit</span>
+                  <span className="text-right text-base font-semibold">
                     {company.address.street}, {company.address.city}, {company.address.state} {company.address.zip}
                   </span>
                 </div>
               </li>
             </ul>
+            <p className="mt-7 pb-2 text-sm font-medium text-fg-muted">{company.slogan}.</p>
           </div>
         </nav>
       </div>

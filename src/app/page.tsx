@@ -1,50 +1,87 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
-import { ConnectsPathway } from "@/components/home/connects-pathway";
-import { ProcessTimeline } from "@/components/home/process-timeline";
-import { ProductDirectory } from "@/components/home/product-directory";
-import { ApplicationMap } from "@/components/home/application-map";
+import { ConnectionStatement } from "@/components/home/connection-statement";
+import { ProductObservatory } from "@/components/product-observatory";
+import { EngineeringChambers } from "@/components/engineering-chambers";
+import { EdgeField } from "@/components/edge-field";
 import { Confidence } from "@/components/home/confidence";
 import { CTASection } from "@/components/cta-section";
-import { ConductorSeam } from "@/components/conductor";
-import { SheetRail, type RailSheet } from "@/components/sheet-rail";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-/* Homepage as narrative — one continuous document, seven numbered
-   sheets joined by conductor seams so the signal never breaks:
-   01 SIGNAL · 02 CONNECTION · 03 ENGINEERING · 04 PRODUCTS
-   05 APPLICATION · 06 CONFIDENCE · 07 CONTACT                  */
-
-const sheets: RailSheet[] = [
-  { id: "signal", n: "01", label: "Signal" },
-  { id: "connection", n: "02", label: "Connection" },
-  { id: "engineering", n: "03", label: "Engineering" },
-  { id: "products", n: "04", label: "Products" },
-  { id: "application", n: "05", label: "Application" },
-  { id: "confidence", n: "06", label: "Confidence" },
-  { id: "contact", n: "07", label: "Contact" },
-];
+/* Homepage as one continuous connection — the signal enters at the
+   hero and resolves at contact. Seven movements:
+   01 IDENTITY · 02 THE CONNECTION · 03 PRODUCTS · 04 ENGINEERING
+   05 APPLICATIONS · 06 CONFIDENCE · 07 CONTACT                    */
 
 export default function HomePage() {
   return (
     <>
-      <SheetRail items={sheets} />
-
+      {/* 01 — identity */}
       <Hero />
-      <ConductorSeam to="02 · Connection" theme="dark" />
-      <ConnectsPathway />
-      <ConductorSeam to="03 · Engineering" theme="light" />
-      <ProcessTimeline />
-      <ConductorSeam to="04 · Products" theme="dark" />
-      <ProductDirectory />
-      <ConductorSeam to="05 · Application" theme="light" />
-      <ApplicationMap />
-      <ConductorSeam to="06 · Confidence" theme="dark" />
+
+      {/* 02 — the connection */}
+      <ConnectionStatement />
+
+      {/* 03 — products */}
+      <section
+        id="products"
+        aria-labelledby="home-products-heading"
+        className="theme-light scroll-mt-20 bg-bg text-fg"
+      >
+        <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
+          <p className="label-mono text-fg-faint">Products</p>
+          <h2 id="home-products-heading" className="display-l mt-6 max-w-3xl">
+            Three families. One connection
+            infrastructure.
+          </h2>
+
+          <ProductObservatory />
+        </div>
+      </section>
+
+      {/* 04 — engineering */}
+      <section id="engineering" aria-labelledby="home-engineering-heading" className="scroll-mt-20">
+        <div className="bg-bg-deep text-fg">
+          <div className="mx-auto max-w-[84rem] px-5 pb-16 pt-24 md:px-10 md:pb-24 md:pt-36">
+            <p className="label-mono text-fg-faint">Engineering</p>
+            <h2 id="home-engineering-heading" className="display-l mt-6 max-w-3xl">
+              Every discipline has its own&nbsp;behavior.
+            </h2>
+          </div>
+        </div>
+        <EngineeringChambers />
+      </section>
+
+      {/* 05 — applications */}
+      <section
+        id="applications"
+        aria-labelledby="home-applications-heading"
+        className="scroll-mt-20 bg-bg text-fg"
+      >
+        <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
+          <p className="label-mono text-fg-faint">Applications</p>
+          <div className="mt-6 flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
+            <h2 id="home-applications-heading" className="display-l max-w-2xl">
+              Where the connections&nbsp;go.
+            </h2>
+            <p className="label-mono max-w-xs pb-2 !text-[0.62rem] leading-relaxed text-fg-faint">
+              HOVER TO TRACE A RELATION · CLICK TO PIN IT
+            </p>
+          </div>
+
+          <div className="mt-16 md:mt-20">
+            <EdgeField />
+          </div>
+        </div>
+      </section>
+
+      {/* 06 — confidence */}
       <Confidence />
-      <ConductorSeam to="07 · Contact" theme="deep" />
+
+      {/* 07 — contact */}
       <CTASection id="contact" />
     </>
   );

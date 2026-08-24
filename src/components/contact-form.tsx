@@ -113,9 +113,9 @@ export function ContactForm() {
 
   if (status === "opened") {
     return (
-      <div className="reg-corners border border-line-strong bg-surface p-8 md:p-10">
+      <div className="border border-line-strong bg-surface p-8 md:p-10">
         <p className="label-mono text-accent">Inquiry prepared</p>
-        <h2 className="type-display-m mt-5 !text-[1.7rem]">
+        <h2 className="font-display mt-5 text-[1.6rem] font-semibold leading-tight tracking-tight">
           Your email draft is ready to&nbsp;send.
         </h2>
         <p className="type-body mt-5 text-fg-muted">
@@ -158,7 +158,7 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       noValidate
       aria-describedby="form-status"
-      className="reg-corners border border-line-strong bg-surface p-6 sm:p-8 md:p-10"
+      className="border border-line-strong bg-surface p-6 sm:p-8 md:p-10"
     >
       {/* honeypot */}
       <div className="absolute h-0 w-0 overflow-hidden opacity-0" aria-hidden="true">

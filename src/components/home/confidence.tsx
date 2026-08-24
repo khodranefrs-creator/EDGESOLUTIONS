@@ -1,24 +1,21 @@
 import { Inview } from "@/components/inview";
-import { SectionRule } from "@/components/ui";
 import { differentiators } from "@/lib/site";
 
 /* 06 — CONFIDENCE
-   A statement moment, then the differentiators revealed as a
-   specification list. No icons, no cards. */
+   One strong statement, then the verified differentiators held in a
+   quiet architecture of space — no specification list, no rows with
+   rules. The words carry it. */
 
 export function Confidence() {
   return (
-    <section id="confidence" className="bg-bg-deep text-fg" aria-labelledby="confidence-heading">
-      <div className="mx-auto max-w-[84rem] px-5 py-20 md:px-10 lg:py-28">
+    <section className="theme-light bg-bg text-fg" aria-labelledby="confidence-heading">
+      <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
         <Inview>
-          <SectionRule n="06" label="CONFIDENCE — WHY CLEAREDGE" meta="SPECIFICATION / 10 ENTRIES" />
-          <h2 id="confidence-heading" className="type-display-l mt-10 max-w-4xl">
-            Precision is not an&nbsp;extra.
-            <span className="mt-1 block text-fg-muted">
-              It is the expectation.
-            </span>
+          <h2 id="confidence-heading" className="display-xl max-w-5xl">
+            Precision is not an extra.
+            <span className="mt-1 block text-fg-muted">It is the expectation.</span>
           </h2>
-          <p className="type-body measure mt-8 max-w-2xl text-fg-muted">
+          <p className="type-lede measure mt-10 max-w-2xl text-fg-muted">
             ClearEdge Solutions is distinguished by its ability to deliver
             complex, customized builds with efficiency and precision —
             combining agility with technical excellence to provide unmatched
@@ -26,22 +23,14 @@ export function Confidence() {
           </p>
         </Inview>
 
-        <Inview delay={140}>
-          <dl className="mt-16 grid gap-x-16 border-t border-line-strong sm:grid-cols-2">
-            {differentiators.map((d, i) => (
-              <div
-                key={d.term}
-                className="group flex items-baseline justify-between gap-6 border-b border-line py-4 transition-colors duration-200 hover:border-accent"
-              >
-                <dt className="flex min-w-0 items-baseline gap-4">
-                  <span className="label-mono shrink-0 !text-[0.62rem] text-fg-faint transition-colors group-hover:text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="truncate text-sm font-medium">{d.term}</span>
+        <Inview delay={160}>
+          <dl className="mt-20 grid gap-x-20 gap-y-9 sm:grid-cols-2 lg:grid-cols-2">
+            {differentiators.map((d) => (
+              <div key={d.term} className="group">
+                <dt className="text-[1.05rem] font-semibold transition-colors duration-200 group-hover:text-accent">
+                  {d.term}
                 </dt>
-                <dd className="hidden shrink-0 text-xs text-fg-faint transition-colors group-hover:text-fg-muted sm:block">
-                  {d.note}
-                </dd>
+                <dd className="mt-1 text-sm leading-relaxed text-fg-muted">{d.note}</dd>
               </div>
             ))}
           </dl>
