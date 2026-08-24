@@ -8,7 +8,7 @@ import { productFamilies, industries } from "@/lib/site";
 
 export function ProductDirectory() {
   return (
-    <section className="theme-light bg-bg text-fg" aria-labelledby="directory-heading">
+    <section id="products" className="theme-light bg-bg text-fg" aria-labelledby="directory-heading">
       <div className="mx-auto max-w-[84rem] px-5 py-20 md:px-10 lg:py-28">
         <Inview>
           <SectionRule n="04" label="PRODUCTS — WHAT CLEAREDGE PRODUCES" meta="PRODUCT DIRECTORY / 03 FAMILIES" />

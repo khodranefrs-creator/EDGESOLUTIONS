@@ -9,7 +9,7 @@ import { industries, familiesForIndustry, productFamilies } from "@/lib/site";
 
 export function ApplicationMap() {
   return (
-    <section className="bg-bg text-fg" aria-labelledby="application-map-heading">
+    <section id="application" className="bg-bg text-fg" aria-labelledby="application-map-heading">
       <div className="mx-auto max-w-[84rem] px-5 py-20 md:px-10 lg:py-28">
         <Inview>
           <SectionRule n="05" label="APPLICATION — WHERE CAPABILITY MATTERS" meta="INDUSTRY → PRODUCT FAMILY" />

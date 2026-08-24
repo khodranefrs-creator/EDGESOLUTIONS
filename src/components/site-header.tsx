@@ -314,27 +314,63 @@ export function SiteHeader() {
               (item) => {
                 const active =
                   item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+                const isProducts = item.href === "/products";
                 return (
                   <li key={item.href} className="hairline-b">
                     <Link
                       href={item.href}
                       onClick={() => setOpen(false)}
                       aria-current={active ? "page" : undefined}
-                      className="group flex min-h-[3.75rem] items-center justify-between gap-6 py-4"
+                      className={`group relative flex min-h-[3.75rem] items-center justify-between gap-6 py-4 pl-5 ${
+                        active ? "menu-row-active" : ""
+                      }`}
                     >
-                      <span
-                        className={`relative font-display text-[1.65rem] font-semibold leading-none tracking-tight transition-colors ${
-                          active
-                            ? "text-accent after:absolute after:-bottom-1.5 after:left-0 after:h-[2px] after:w-6 after:bg-accent after:content-['']"
-                            : "group-hover:text-accent"
-                        }`}
-                      >
-                        {item.label}
+                      <span className="flex items-baseline gap-4">
+                        <span
+                          className={`label-mono !text-[0.58rem] ${
+                            active ? "text-accent" : "text-fg-faint"
+                          }`}
+                          aria-hidden="true"
+                        >
+                          {item.n}
+                        </span>
+                        <span
+                          className={`font-display text-[1.65rem] font-semibold leading-none tracking-tight transition-colors group-focus-visible:text-accent group-hover:text-accent ${
+                            active ? "text-accent" : ""
+                          }`}
+                        >
+                          {item.label}
+                        </span>
                       </span>
-                      <span className={`label-mono ${active ? "text-accent" : "text-fg-faint"}`}>
-                        {item.n}
+                      <span className="label-mono !text-[0.56rem] text-fg-faint" aria-hidden="true">
+                        {isProducts ? "03 FAMILIES" : ""}
                       </span>
                     </Link>
+
+                    {/* v2: the product directory travels inside the menu */}
+                    {isProducts ? (
+                      <div className="pb-4 pl-5">
+                        <p className="label-mono !text-[0.54rem] text-fg-faint">
+                          Product directory
+                        </p>
+                        <ul className="mt-1 border-l border-line">
+                          {productFamilies.map((family) => (
+                            <li key={family.id}>
+                              <Link
+                                href={`/products#${family.id}`}
+                                onClick={() => setOpen(false)}
+                                className="flex min-h-[2.75rem] items-baseline gap-3 py-2 pl-4 text-sm text-fg-muted transition-colors hover:text-accent focus-visible:text-accent"
+                              >
+                                <span className="label-mono !text-[0.54rem] text-accent">
+                                  {family.index}
+                                </span>
+                                {family.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
                   </li>
                 );
               },

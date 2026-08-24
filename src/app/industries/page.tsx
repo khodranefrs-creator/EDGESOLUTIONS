@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { Inview } from "@/components/inview";
+import { TechnicalLabel } from "@/components/ui";
+import { ConductorSeam } from "@/components/conductor";
 import { CTASection } from "@/components/cta-section";
 import { industries, familiesForIndustry } from "@/lib/site";
 
@@ -11,6 +13,15 @@ export const metadata: Metadata = {
     "ClearEdge Solutions serves technology-driven industries including data centers, semiconductor equipment, automotive, and clean energy with engineered connectivity and assembly solutions.",
   alternates: { canonical: "/industries" },
 };
+
+/* CONDUCTOR SYSTEM v2 — fan-out map.
+   The three product families sit on one source bus; every verified
+   relation to an industry is drawn as one continuous curve landing
+   on that industry's terminal. Relations come straight from the
+   site's single-source data layer — nothing invented. */
+
+const familyBusY = [65, 215, 365];
+const industryY = [55, 175, 295, 415];
 
 export default function IndustriesPage() {
   return (
@@ -26,6 +37,82 @@ export default function IndustriesPage() {
         lede="We serve technology-driven industries — where performance requirements are exacting and dependability is the baseline, not the goal."
         meta="APPLICATION MAP / 04 DESTINATIONS"
       />
+
+      {/* fan-out system map */}
+      <section className="bg-bg text-fg" aria-labelledby="fanout-heading">
+        <div className="mx-auto max-w-[84rem] px-5 pb-20 pt-16 md:px-10 lg:pb-24">
+          <Inview>
+            <TechnicalLabel>System map</TechnicalLabel>
+            <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
+              <h2 id="fanout-heading" className="type-display-m max-w-xl">
+                Three families. Four destinations.
+              </h2>
+              <p className="label-mono hidden !text-[0.6rem] text-fg-faint sm:block" aria-hidden="true">
+                SIX VERIFIED PATHWAYS
+              </p>
+            </div>
+          </Inview>
+
+          <p className="sr-only">
+            Diagram of verified relations between product families and
+            industries: Fiber Optic cable assemblies serve Data Centers and
+            Semiconductor Equipment; Copper cable assemblies serve Data
+            Centers and Automotive; Electro-Mechanical box builds serve
+            Semiconductor Equipment and Clean Energy.
+          </p>
+
+          <Inview variant="draw" delay={120} className="mt-12 hidden text-line-strong md:block">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 1000 430"
+              fill="none"
+              className="block h-auto w-full"
+            >
+              {/* source bus joining the three families */}
+              <line x1="150" y1="65" x2="150" y2="365" stroke="currentColor" strokeWidth="1" opacity="0.4" pathLength={1} />
+
+              {/* verified relation curves */}
+              <path d="M155 65C420 65 560 55 842 55" strokeWidth="1.25" pathLength={1} />
+              <path d="M155 65C420 65 560 175 842 175" strokeWidth="1.25" pathLength={1} />
+              <path d="M155 215C420 215 560 55 842 55" strokeWidth="1.25" pathLength={1} />
+              <path d="M155 215C420 215 560 295 842 295" strokeWidth="1.25" pathLength={1} />
+              <path d="M155 365C420 365 560 175 842 175" strokeWidth="1.25" pathLength={1} />
+              <path d="M155 365C420 365 560 415 842 415" strokeWidth="1.25" pathLength={1} />
+
+              {/* family terminals */}
+              {familyBusY.map((y) => (
+                <rect key={y} x="145" y={y - 5} width="10" height="10" fill="var(--bg)" pathLength={1} />
+              ))}
+
+              {/* industry terminals */}
+              {industryY.map((y) => (
+                <g key={y}>
+                  <circle cx="850" cy={y} r="8" stroke="currentColor" strokeWidth="1" pathLength={1} />
+                  <circle cx="850" cy={y} r="3" fill="var(--signal)" stroke="none" pathLength={1} />
+                </g>
+              ))}
+
+              {/* labels */}
+              <g fill="var(--fg-muted)" style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.18em" }} fontSize="11">
+                <text x="128" y={familyBusY[0] + 4} textAnchor="end">01 · FIBER OPTIC</text>
+                <text x="128" y={familyBusY[1] + 4} textAnchor="end">02 · COPPER</text>
+                <text x="128" y={familyBusY[2] + 4} textAnchor="end">03 · ELECTRO-MECH</text>
+                {industries.map((ind, i) => (
+                  <text key={ind.id} x="838" y={industryY[i] - 14} textAnchor="end">
+                    {ind.name.toUpperCase()}
+                  </text>
+                ))}
+              </g>
+            </svg>
+          </Inview>
+
+          <p className="type-caption mt-6 hidden md:block" aria-hidden="true">
+            Schematic — relations as verified per product applications
+          </p>
+        </div>
+      </section>
+
+      <ConductorSeam to="Industry ledger" theme="dark" />
 
       <section className="theme-light bg-bg text-fg" aria-label="Industry application map">
         <div className="mx-auto max-w-[84rem] px-5 py-16 md:px-10 lg:py-24">

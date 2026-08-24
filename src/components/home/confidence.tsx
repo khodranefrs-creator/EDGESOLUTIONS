@@ -8,7 +8,7 @@ import { differentiators } from "@/lib/site";
 
 export function Confidence() {
   return (
-    <section className="bg-bg-deep text-fg" aria-labelledby="confidence-heading">
+    <section id="confidence" className="bg-bg-deep text-fg" aria-labelledby="confidence-heading">
       <div className="mx-auto max-w-[84rem] px-5 py-20 md:px-10 lg:py-28">
         <Inview>
           <SectionRule n="06" label="CONFIDENCE — WHY CLEAREDGE" meta="SPECIFICATION / 10 ENTRIES" />

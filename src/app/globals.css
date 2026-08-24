@@ -649,7 +649,80 @@ select.field-input {
   background-size: 6px 6px;
   background-repeat: no-repeat;
 }
-select.field-input option {
+.select.field-input option {
   background: var(--surface);
   color: var(--fg);
+}
+
+/* ==================================================================
+   CONDUCTOR SYSTEM v2 — the ClearEdge signature device.
+   One grammar (hairline + square junction + rare accent node/pulse)
+   expressed as: seams between sections, trunk-and-drop buses,
+   fan-out maps, process lines, and the resolve-to-terminal finale.
+================================================================== */
+
+.label-mono,
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.type-caption {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+/* graduated scale, ticks rising from the top edge */
+.tick-rule-top {
+  position: relative;
+  border-top: 1px solid var(--line-strong);
+}
+.tick-rule-top::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -6px;
+  height: 5px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--line-strong) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+/* sheet rail — the document margin that tracks reading position */
+.sheet-rail-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* mobile menu v2 — active entry carries a hard accent rule */
+.menu-row-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2rem;
+  width: 2px;
+  transform: translateY(-50%);
+  background: var(--accent);
+}
+
+/* terminal node — the single accent dot breathes once per cycle */
+.conductor-dot {
+  animation: conductor-breathe 2.8s ease-in-out infinite;
+}
+@keyframes conductor-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+html:not(.js) .conductor-dot {
+  animation: none;
 }

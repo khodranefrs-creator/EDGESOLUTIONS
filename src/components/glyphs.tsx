@@ -90,3 +90,27 @@ export function BoxSchematic({ className = "" }: GlyphProps) {
     </svg>
   );
 }
+
+/* trunk-and-drop topology — one continuous trunk, engineered drops,
+   a single signal node where the connection lands */
+export function TrunkDropGlyph({ className = "" }: GlyphProps) {
+  const drops = [180, 330, 480, 630, 780];
+  return (
+    <svg viewBox="0 0 900 130" fill="none" stroke="currentColor" strokeWidth="1.25" className={className} aria-hidden="true">
+      {/* feed terminal */}
+      <rect x="14" y="34" width="11" height="11" />
+      <path d="M25 40H872" strokeWidth="1.5" />
+      {/* drops */}
+      {drops.map((x) => (
+        <g key={x}>
+          <path d={`M${x} 40V104`} />
+          <rect x={x - 5} y="104" width="10" height="10" fill="var(--bg)" />
+        </g>
+      ))}
+      {/* the landed connection */}
+      <circle cx="480" cy="40" r="3.2" fill="#0092fc" stroke="none" />
+      {/* far-end terminal */}
+      <path d="M872 34v11" strokeWidth="1.5" />
+    </svg>
+  );
+}

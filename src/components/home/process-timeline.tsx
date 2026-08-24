@@ -8,7 +8,7 @@ import { flowSteps } from "@/lib/site";
 
 export function ProcessTimeline() {
   return (
-    <section className="relative overflow-hidden bg-bg text-fg" aria-labelledby="process-heading">
+    <section id="engineering" className="relative overflow-hidden bg-bg text-fg" aria-labelledby="process-heading">
       <div className="mx-auto max-w-[84rem] px-5 py-20 md:px-10 lg:py-28">
         <Inview>
           <SectionRule n="03" label="ENGINEERING — HOW CLEAREDGE WORKS" meta="FIG. 02 / SEQUENCE" />

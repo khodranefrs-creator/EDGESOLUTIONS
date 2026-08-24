@@ -57,7 +57,7 @@ export function ConnectsPathway() {
   const [active, setActive] = useState<string | null>("fiber");
 
   return (
-    <section className="theme-light bg-bg text-fg" aria-labelledby="connects-heading">
+    <section id="connection" className="theme-light bg-bg text-fg" aria-labelledby="connects-heading">
       <div className="mx-auto max-w-[84rem] px-5 py-20 md:px-10 lg:py-28">
         <Inview>
           <SectionRule n="02" label="CONNECTION — WHAT CLEAREDGE CONNECTS" meta="SIGNAL PATHWAY / 05 NODES" />

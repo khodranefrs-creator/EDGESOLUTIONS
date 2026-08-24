@@ -4,14 +4,15 @@ import mtpTrunkAssembly from "@/assets/mtp-trunk-assembly.webp";
 
 /* 01 — SIGNAL
    Cinematic engineering statement. Left: the typographic claim.
-   Right: the approved T&S asset presented as a specimen on a
-   technical plate. A thin signal conductor runs headline →
-   artifact → next section; reduced-motion users receive the
-   static conductor only. */
+   Right: the approved T&S asset presented as a restrained specimen
+   on a technical stage — stage clips hold the part, an NTS scale
+   bar and site coordinates annotate it like a drawing sheet. A thin
+   signal conductor runs headline → artifact → next section seam;
+   reduced-motion users receive the static conductor only. */
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-bg text-fg" aria-labelledby="hero-heading">
+    <section id="signal" className="relative overflow-hidden bg-bg text-fg" aria-labelledby="hero-heading">
       <div className="bp-grid absolute inset-0" aria-hidden="true" />
 
       {/* signal conductor — headline → artifact → next section */}
@@ -83,38 +84,57 @@ export function Hero() {
             </Link>
           </div>
 
+          {/* slogan strip — the company line, stated once */}
           <p
             aria-hidden="true"
-            className="label-mono mt-14 hidden !text-[0.62rem] text-fg-faint sm:flex items-center gap-4 hero-rise"
+            className="label-mono mt-14 hidden !text-[0.62rem] text-fg-faint sm:flex sm:items-center sm:gap-4 hero-rise"
             style={{ "--hero-delay": 340 } as React.CSSProperties}
           >
-            <span>Fiber Optic</span>
-            <span className="h-[1px] w-6 bg-line-strong" />
-            <span>Copper</span>
-            <span className="h-[1px] w-6 bg-line-strong" />
-            <span>Electro-Mechanical</span>
+            <span className="text-accent">Your Partner For Connectivity</span>
+            <span aria-hidden="true" className="h-[1px] w-8 bg-line-strong" />
+            <span>37.35°N&nbsp;121.95°W</span>
           </p>
         </div>
 
-        {/* artifact */}
+        {/* artifact — specimen stage */}
         <figure className="plate reg-corners p-5 md:p-6 hero-rise" style={{ "--hero-delay": 220 } as React.CSSProperties}>
           <figcaption className="plate-head">
             <span className="label-mono !text-[0.62rem] text-fg-faint">FIG. 01</span>
             <span className="label-mono !text-[0.62rem] text-fg-faint">APPROVED ASSET</span>
           </figcaption>
-          <Image
-            src={mtpTrunkAssembly}
-            alt="Multi-fiber trunk cable assembly with an aqua jacket and MPO-style connectors"
-            priority
-            sizes="(max-width: 1024px) 100vw, 520px"
-            className="h-auto w-full object-contain pt-4"
-          />
+
+          <div className="relative pt-4">
+            <Image
+              src={mtpTrunkAssembly}
+              alt="Multi-fiber trunk cable assembly with an aqua jacket and MPO-style connectors"
+              priority
+              sizes="(max-width: 1024px) 100vw, 520px"
+              className="h-auto w-full object-contain"
+            />
+            {/* specimen stage clips */}
+            <span aria-hidden="true" className="absolute left-0 top-[24%] h-5 w-2.5 border-y border-l border-line-strong" />
+            <span aria-hidden="true" className="absolute left-0 bottom-[18%] h-5 w-2.5 border-y border-l border-line-strong" />
+            <span aria-hidden="true" className="absolute right-0 top-[24%] h-5 w-2.5 border-y border-r border-line-strong" />
+            <span aria-hidden="true" className="absolute right-0 bottom-[18%] h-5 w-2.5 border-y border-r border-line-strong" />
+          </div>
+
+          {/* NTS scale bar + site stamp */}
+          <div aria-hidden="true" className="mt-4 flex items-center justify-between gap-6">
+            <span className="flex items-center gap-2 text-line-strong">
+              <svg width="88" height="9" viewBox="0 0 88 9" fill="none" stroke="currentColor" strokeWidth="1">
+                <path d="M0.5 0v9M22.5 3v6M44.5 0v9M66.5 3v6M87.5 0v9M0.5 8.5h87" />
+              </svg>
+              <span className="label-mono !text-[0.56rem] text-fg-faint">NTS</span>
+            </span>
+            <span className="label-mono !text-[0.56rem] text-fg-faint">SAN JOSE · CA 95131</span>
+          </div>
+
           <div className="plate-foot mt-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
             <span className="label-mono !text-[0.68rem] !tracking-[0.16em] text-fg">
               MULTI-FIBER TRUNK ASSEMBLY
             </span>
             <span className="label-mono !text-[0.62rem] text-accent">
-              CLEAREDGE / PRODUCT FAMILY&nbsp;01
+              FAMILY&nbsp;01&nbsp;/&nbsp;03
             </span>
           </div>
         </figure>
