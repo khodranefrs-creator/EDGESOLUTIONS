@@ -9,7 +9,7 @@ type GlyphProps = { className?: string };
    other in an ordered bundle, one strand carrying the signal. */
 export function CopperComposition({ className = "" }: GlyphProps) {
   return (
-    <svg viewBox="0 0 640 480" fill="none" className={className} aria-hidden="true">
+    <svg viewBox="0 0 640 480" fill="none" className={className} aria-hidden="true" shapeRendering="geometricPrecision">
       <g stroke="currentColor" strokeWidth="1.25" opacity="0.5">
         <path d="M40 120C160 120 180 168 320 168s160-48 280-48" />
         <path d="M40 176c120 0 140 44 280 44s160-44 280-44" />
@@ -43,7 +43,7 @@ export function CopperComposition({ className = "" }: GlyphProps) {
    plug-in modules on rails, ports, and an internal harness. */
 export function BoxComposition({ className = "" }: GlyphProps) {
   return (
-    <svg viewBox="0 0 640 480" fill="none" className={className} aria-hidden="true">
+    <svg viewBox="0 0 640 480" fill="none" className={className} aria-hidden="true" shapeRendering="geometricPrecision">
       {/* chassis */}
       <rect x="92" y="72" width="456" height="336" stroke="currentColor" strokeWidth="1.5" />
       {/* module rails */}

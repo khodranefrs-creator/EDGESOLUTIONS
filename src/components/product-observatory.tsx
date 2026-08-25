@@ -118,7 +118,8 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
                 <Image
                   src={mtpTrunkAssembly}
                   alt="Close view of the multi-fiber trunk cable assembly — jacket and connector detailing"
-                  sizes="(max-width: 1024px) 100vw, 640px"
+                  sizes="(max-width: 1024px) 100vw, 720px"
+                  quality={90}
                   className="absolute inset-0 h-full w-full object-cover"
                   style={{ transform: "scale(1.62)", transformOrigin: "37% 52%" }}
                 />
@@ -131,9 +132,9 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
               >
                 <div className="relative z-[1] flex h-full w-full items-center justify-center">
                   {active.id === "copper-cabling" ? (
-                    <CopperComposition className="h-auto max-h-[300px] w-full max-w-lg" />
+                    <CopperComposition className="h-full w-auto max-w-full" />
                   ) : (
-                    <BoxComposition className="h-auto max-h-[300px] w-full max-w-lg" />
+                    <BoxComposition className="h-full w-auto max-w-full" />
                   )}
                 </div>
                 <p className="meta-mono absolute bottom-3 left-4 z-[1]" aria-hidden="true">
