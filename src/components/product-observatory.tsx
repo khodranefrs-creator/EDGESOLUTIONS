@@ -1,23 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { productFamilies, industries } from "@/lib/site";
-import mtpTrunkAssembly from "@/assets/mtp-trunk-assembly.webp";
 import { CopperComposition, BoxComposition } from "@/components/glyphs";
 
 /* 03 — THE PRODUCT CATALOG
     A technical register, not a marketing block. The selector reads as
     a catalog index (01/02/03); the active family opens as a catalog
-    sheet — specimen left, documentation register right. The fiber
-    photograph is the SAME approved source as the hero specimen but
-    framed as a tight material study (detail crop), so the two plates
-    never show the same image twice. Copper and electro-mechanical
-    present original schematic geometry. Nothing invented. */
+    sheet — specimen left, documentation register right. Copper and
+    electro-mechanical present original schematic geometry. Nothing
+    invented. */
 
 const stageGround: Record<string, string> = {
-  "fiber-optic": "#f2f3f4",
   "copper-cabling": "#f4f1ea",
   "electro-mechanical": "#f1f0ec",
 };
@@ -107,23 +102,11 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
                 FIG. {String(activeIndex + 2).padStart(2, "0")}
               </span>
               <span className="label-mono hidden text-fg-faint sm:block">
-                {active.id === "fiber-optic" ? "DETAIL — MATERIAL STUDY" : "SCHEMATIC REPRESENTATION"}
+                SCHEMATIC REPRESENTATION
               </span>
             </figcaption>
 
-            {active.id === "fiber-optic" ? (
-              /* tight framing of the approved source — same asset as
-                 FIG. 01, entirely different crop and purpose */
-              <div className="relative mt-4 aspect-[16/11] overflow-hidden border border-line">
-                <Image
-                  src={mtpTrunkAssembly}
-                  alt="Close view of the multi-fiber trunk cable assembly — jacket and connector detailing"
-                  sizes="(max-width: 1024px) 100vw, 720px"
-                  quality={90}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </div>
-            ) : (
+            {active.id !== "fiber-optic" && (
               <div
                 data-family={active.id}
                 className="relative mt-4 flex aspect-[16/11] items-center justify-center overflow-hidden border border-line p-8 md:p-10"
