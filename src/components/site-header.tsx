@@ -15,7 +15,7 @@ import mainlogo from "@/assets/mainlogo.png";
 /* numbered rows and generous touch targets.                           */
 /* ------------------------------------------------------------------ */
 
-function Logo({ className = "h-9 w-auto md:h-10" }: { className?: string }) {
+function Logo({ className = "h-11 w-auto md:h-14" }: { className?: string }) {
   return (
     <Image
       src={mainlogo}
@@ -297,7 +297,7 @@ export function SiteHeader() {
             className="flex shrink-0 items-center"
             aria-label="ClearEdge Solutions — home"
           >
-            <Logo className="h-8 w-auto" />
+            <Logo className="h-9 w-auto" />
           </Link>
           <button
             type="button"
