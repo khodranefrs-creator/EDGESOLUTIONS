@@ -5,7 +5,6 @@ import { ProductObservatory } from "@/components/product-observatory";
 import { EngineeringChambers } from "@/components/engineering-chambers";
 import { EdgeField } from "@/components/edge-field";
 import { Confidence } from "@/components/home/confidence";
-import { EdgeBand } from "@/components/home/edge-band";
 import { CTASection } from "@/components/cta-section";
 
 export const metadata: Metadata = {
@@ -13,9 +12,9 @@ export const metadata: Metadata = {
 };
 
 /* Homepage as one continuous connection — the signal enters at the
-   hero and resolves at contact. Seven movements:
+   hero and resolves at contact. Six movements:
    01 IDENTITY · 02 THE CONNECTION · 03 PRODUCTS · 04 ENGINEERING
-   05 APPLICATIONS · 06 STRUCTURE / CONFIDENCE · 07 CONTACT       */
+   05 APPLICATIONS · 06 CONFIDENCE · 07 CONTACT                 */
 
 export default function HomePage() {
   return (
@@ -88,8 +87,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 06 — physical structure, then confidence */}
-      <EdgeBand />
+      {/* 06 — confidence */}
       <Confidence />
 
       {/* 07 — contact */}
