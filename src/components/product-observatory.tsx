@@ -121,7 +121,6 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
                   sizes="(max-width: 1024px) 100vw, 720px"
                   quality={90}
                   className="absolute inset-0 h-full w-full object-cover"
-                  style={{ transform: "scale(1.5)", transformOrigin: "40% 52%" }}
                 />
               </div>
             ) : (
