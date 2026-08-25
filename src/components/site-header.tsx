@@ -206,8 +206,8 @@ export function SiteHeader() {
           <div className="world-panel border-b border-line-strong bg-white">
             <div className="mx-auto max-w-[88rem] px-10 pb-11 pt-9">
               <div className="flex items-baseline justify-between">
-                <p className="label-mono !text-[0.6rem] text-fg-faint">Product Directory</p>
-                <p className="label-mono hidden !text-[0.58rem] text-fg-faint xl:block" aria-hidden="true">
+                <p className="label-mono text-fg-faint">Product Directory</p>
+                <p className="label-mono hidden text-fg-faint xl:block" aria-hidden="true">
                   THREE FAMILIES — ONE CONNECTION INFRASTRUCTURE
                 </p>
               </div>
@@ -225,7 +225,7 @@ export function SiteHeader() {
                       onClick={() => setDirectoryOpen(false)}
                       className="world-item block"
                     >
-                      <span className="label-mono block !text-[0.66rem] text-signal">
+                      <span className="label-mono block text-signal">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="mt-4 block font-display text-[1.42rem] font-semibold leading-snug tracking-[-0.02em] transition-colors duration-150 group-hover:text-accent">
@@ -314,7 +314,7 @@ export function SiteHeader() {
                   pathname === "/" ? "text-accent" : ""
                 }`}
               >
-                <span className="label-mono w-7 shrink-0 !text-[0.62rem] text-fg-faint">00</span>
+                <span className="label-mono w-7 shrink-0 text-fg-faint">00</span>
                 <span className="font-display text-[1.9rem] font-semibold leading-tight tracking-tight">
                   Home
                 </span>
@@ -331,7 +331,7 @@ export function SiteHeader() {
                   productsActive ? "text-accent" : ""
                 }`}
               >
-                <span className="label-mono w-7 shrink-0 !text-[0.62rem] text-fg-faint">01</span>
+                <span className="label-mono w-7 shrink-0 text-fg-faint">01</span>
                 <span className="font-display text-[1.9rem] font-semibold leading-tight tracking-tight">
                   Products
                 </span>
@@ -358,7 +358,7 @@ export function SiteHeader() {
                           onClick={() => setOpen(false)}
                           className="flex min-h-[3.25rem] items-center gap-4 py-2.5 transition-colors hover:text-accent"
                         >
-                          <span className="label-mono shrink-0 !text-[0.6rem] text-signal-deep">
+                          <span className="label-mono shrink-0 text-signal-deep">
                             {String(fi + 1).padStart(2, "0")}
                           </span>
                           <span className="text-[1.05rem] font-medium">{family.name}</span>
@@ -391,7 +391,7 @@ export function SiteHeader() {
                       active ? "text-accent" : ""
                     }`}
                   >
-                    <span className="label-mono w-7 shrink-0 !text-[0.62rem] text-fg-faint">
+                    <span className="label-mono w-7 shrink-0 text-fg-faint">
                       {String(i + 2).padStart(2, "0")}
                     </span>
                     <span className="font-display text-[1.9rem] font-semibold leading-tight tracking-tight">
@@ -416,23 +416,23 @@ export function SiteHeader() {
 
           {/* direct lines */}
           <div className="mt-10">
-            <p className="label-mono !text-[0.6rem] text-fg-faint">Direct lines</p>
+            <p className="label-mono text-fg-faint">Direct lines</p>
             <ul className="mt-3">
               <li className="border-b border-line">
                 <a href={`tel:${company.phoneHref}`} className="flex min-h-[3.5rem] items-center justify-between gap-6 py-3 transition-colors hover:text-accent">
-                  <span className="label-mono shrink-0 !text-[0.6rem] text-fg-faint">Call</span>
+                  <span className="label-mono shrink-0 text-fg-faint">Call</span>
                   <span className="text-right font-display text-base font-semibold">{company.phone}</span>
                 </a>
               </li>
               <li className="border-b border-line">
                 <a href={`mailto:${company.email}`} className="flex min-h-[3.5rem] items-center justify-between gap-6 py-3 transition-colors hover:text-accent">
-                  <span className="label-mono shrink-0 !text-[0.6rem] text-fg-faint">Email</span>
+                  <span className="label-mono shrink-0 text-fg-faint">Email</span>
                   <span className="break-all text-right font-display text-base font-semibold">{company.email}</span>
                 </a>
               </li>
               <li className="border-b border-line">
                 <div className="flex min-h-[3.5rem] items-center justify-between gap-6 py-3">
-                  <span className="label-mono shrink-0 !text-[0.6rem] text-fg-faint">Visit</span>
+                  <span className="label-mono shrink-0 text-fg-faint">Visit</span>
                   <span className="text-right font-display text-base font-semibold">
                     {company.address.street}, {company.address.city}, {company.address.state} {company.address.zip}
                   </span>

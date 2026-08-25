@@ -196,23 +196,16 @@ body {
   line-height: 1.72;
 }
 
-/* mono is metadata only — never decoration */
+/* mono is metadata only — never decoration.
+   ONE annotation voice site-wide: 11px, uppercase, tabular. */
 .label-mono,
 .meta-mono {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-}
-
-@media (max-width: 640px) {
-  .label-mono,
-  .meta-mono {
-    font-size: 0.62rem;
-    letter-spacing: 0.11em;
-  }
 }
 
 .measure {
@@ -341,13 +334,17 @@ body {
   background: var(--signal);
 }
 
-/* nameplate — official logo presentation on non-white grounds */
+/* nameplate — official logo presentation on non-white grounds.
+   The single approved color logo (blue + graphite artwork) is shown
+   unaltered on a white brand plate: same identity as the header,
+   deliberate as an object, correct on graphite. */
 .nameplate {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  padding: 0.6rem 0.85rem;
 }
 
 /* --------------------------------------------------- specimen plates
@@ -574,7 +571,9 @@ html:not(.js) .env-in {
 }
 
 /* ------------------------------------------ discipline row grounds
-   Static, structural texture only. No ambient motion. */
+   One shared, extremely quiet drafting grid. Structural texture
+   only — no per-row variants, no hover amplification, never
+   dominant enough to compete with the register. */
 
 .chamber {
   position: relative;
@@ -585,44 +584,11 @@ html:not(.js) .env-in {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  transition: opacity 500ms var(--ease-engineered);
-  opacity: var(--chamber-opacity, 0.05);
-}
-.chamber:hover::before,
-.chamber:focus-within::before {
-  opacity: calc(var(--chamber-opacity, 0.05) * 2.2);
-}
-
-.chamber-fiber::before {
-  background-image: repeating-linear-gradient(
-    90deg,
-    currentColor 0 1px,
-    transparent 1px 34px
-  );
-  --chamber-opacity: 0.05;
-}
-
-.chamber-copper::before {
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      currentColor 0 1px,
-      transparent 1px 16px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      currentColor 0 1px,
-      transparent 1px 16px
-    );
-  --chamber-opacity: 0.055;
-}
-
-.chamber-electro::before {
   background-image:
     linear-gradient(to right, currentColor 1px, transparent 1px),
     linear-gradient(to bottom, currentColor 1px, transparent 1px);
   background-size: 62px 62px;
-  --chamber-opacity: 0.06;
+  opacity: 0.035;
 }
 
 /* ----------------------------------------------- navigation states */

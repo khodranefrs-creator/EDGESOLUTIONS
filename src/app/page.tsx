@@ -37,7 +37,7 @@ export default function HomePage() {
               Three families. One connection
               infrastructure.
             </h2>
-            <p className="label-mono hidden pb-2 !text-[0.58rem] text-fg-faint sm:block" aria-hidden="true">
+            <p className="label-mono hidden pb-2 text-fg-faint sm:block" aria-hidden="true">
               CATALOG — 03 FAMILIES
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function HomePage() {
             <h2 id="home-engineering-heading" className="display-functional max-w-3xl">
               Every discipline has its own&nbsp;behavior.
             </h2>
-            <p className="label-mono hidden pb-2 !text-[0.58rem] text-fg-faint sm:block" aria-hidden="true">
+            <p className="label-mono hidden pb-2 text-fg-faint sm:block" aria-hidden="true">
               DISCIPLINES — 05
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function HomePage() {
             <h2 id="home-applications-heading" className="display-l max-w-2xl">
               Where the connections&nbsp;go.
             </h2>
-            <p className="label-mono max-w-xs pb-2 !text-[0.6rem] leading-relaxed text-fg-faint">
+            <p className="label-mono max-w-xs pb-2 leading-relaxed text-fg-faint">
               HOVER TO TRACE A RELATION · CLICK TO PIN IT
             </p>
           </div>

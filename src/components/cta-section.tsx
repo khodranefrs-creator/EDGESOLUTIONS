@@ -25,7 +25,7 @@ export function CTASection({ id = "cta" }: { id?: string }) {
           className="block h-[170px] w-full md:h-[210px]"
         >
           <path
-            d="M1210 -10 C 980 26 820 12 660 44 C 500 76 420 40 300 78 C 210 106 150 140 96 178"
+            d="M1210 -10 C 980 26 820 12 660 44 C 500 76 420 40 300 78 C 210 106 150 142 92 179"
             stroke="currentColor"
             strokeWidth="1"
             vectorEffect="non-scaling-stroke"
@@ -83,8 +83,8 @@ export function CTASection({ id = "cta" }: { id?: string }) {
           aria-hidden="true"
           className="mt-24 hidden items-center justify-between text-fg-faint md:flex"
         >
-          <span className="label-mono !text-[0.58rem]">{company.shortName} Solutions, Inc.</span>
-          <span className="label-mono !text-[0.58rem]">SAN JOSE · CALIFORNIA · USA</span>
+          <span className="label-mono">{company.shortName} Solutions, Inc.</span>
+          <span className="label-mono">SAN JOSE · CALIFORNIA · USA</span>
         </div>
       </div>
     </section>

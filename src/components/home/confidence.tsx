@@ -32,28 +32,34 @@ export function Confidence() {
               aria-hidden="true"
               className="hidden grid-cols-[3.5rem_minmax(0,17rem)_1fr] gap-x-8 border-b border-line-strong pb-3 sm:grid"
             >
-              <p className="label-mono !text-[0.56rem] text-fg-faint">No.</p>
-              <p className="label-mono !text-[0.56rem] text-fg-faint">Specification</p>
-              <p className="label-mono !text-[0.56rem] text-fg-faint">Note</p>
+              <p className="label-mono text-fg-faint">No.</p>
+              <p className="label-mono text-fg-faint">Specification</p>
+              <p className="label-mono text-fg-faint">Note</p>
             </div>
 
-            <dl>
+            <dl className="max-sm:border-t max-sm:border-line-strong">
               {differentiators.map((d, i) => (
                 <div
                   key={d.term}
-                  className={`group grid gap-x-8 border-b border-line py-4 sm:grid-cols-[3.5rem_minmax(0,17rem)_1fr] sm:py-5 ${
-                    i === 0 ? "border-t border-t-line sm:border-t-0" : ""
-                  }`}
+                  data-probe="spec-row"
+                  className="group grid gap-x-8 gap-y-1.5 border-b border-line py-4 sm:grid-cols-[3.5rem_minmax(0,17rem)_minmax(0,1fr)] sm:items-baseline sm:py-5"
                 >
-                  <dt className="flex items-baseline gap-x-4 sm:block">
-                    <span className="label-mono shrink-0 pt-[0.15rem] !text-[0.58rem] text-signal-deep sm:pt-[0.2rem]">
+                  <span
+                    aria-hidden="true"
+                    className="label-mono text-signal-deep max-sm:hidden"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <dt className="min-w-0 font-display text-[1.02rem] font-semibold leading-snug tracking-[-0.01em] transition-colors duration-200 group-hover:text-accent sm:text-[1.08rem]">
+                    <span
+                      aria-hidden="true"
+                      className="label-mono mr-4 text-signal-deep sm:hidden"
+                    >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="font-display text-[1.02rem] font-semibold leading-snug tracking-[-0.01em] transition-colors duration-200 group-hover:text-accent sm:text-[1.08rem]">
-                      {d.term}
-                    </span>
+                    {d.term}
                   </dt>
-                  <dd className="col-start-2 col-end-4 mt-1.5 text-sm leading-relaxed text-fg-muted sm:col-start-3 sm:mt-0">
+                  <dd className="min-w-0 text-sm leading-relaxed text-fg-muted">
                     {d.note}
                   </dd>
                 </div>
@@ -61,7 +67,7 @@ export function Confidence() {
             </dl>
 
             <p
-              className="meta-mono mt-6 flex items-baseline justify-between !text-[0.54rem] text-fg-faint"
+              className="meta-mono mt-6 flex items-baseline justify-between text-fg-faint"
               aria-hidden="true"
             >
               <span>Specification register — company standard</span>

@@ -1,15 +1,18 @@
 import Link from "next/link";
 import { Inview } from "@/components/inview";
 
-/* ENGINEERING DISCIPLINES — three chambers, one system.
-    Each discipline occupies its own spatial composition inside a
-    shared grammar of hairlines, indexes and hover response:
-      01 fiber optic   — declaration left, reference right
-      02 copper        — mirrored: reference left, declaration right
-      03 electro-mech  — full-width declaration, reference set low
-    Ghost numerals index the chambers at architectural scale. No
-    cards, no repeated rows — moving through the section feels like
-    walking through different rooms of one facility. */
+/* ENGINEERING DISCIPLINES — one register, three rows.
+    Each discipline occupies a clearly bounded row box with a fixed
+    internal architecture:
+
+      [ engraved index ]  [ discipline title ]  [ description ]  [ → ]
+
+    The oversized numeral is a GRID CELL, not an overlay: it lives in
+    its own column, can never intersect text, and reads like an
+    engraving in the row's margin. Rows share one baseline system and
+    are separated by hairlines — the section reads as a single
+    engineered register. On mobile the engraving steps aside entirely:
+    a compact mono index leads a stacked title/description row. */
 
 const disciplines = [
   {
@@ -17,24 +20,18 @@ const disciplines = [
     name: "Fiber Optic",
     line: "High performance fiber optic cabling systems, engineered to meet exact performance requirements for technology-driven applications.",
     href: "/capabilities#fiber-optic",
-    cls: "chamber-fiber",
-    variant: "a" as const,
   },
   {
     id: "copper-cabling",
     name: "Copper Cabling",
     line: "Copper cabling systems designed and manufactured for reliability, built around each customer's configuration and design requirements.",
     href: "/capabilities#copper-cabling",
-    cls: "chamber-copper",
-    variant: "b" as const,
   },
   {
     id: "electro-mechanical",
     name: "Electro-Mechanical Assemblies",
     line: "Box build assemblies that integrate connectivity into complete systems — assembled and finished to the standards critical applications demand.",
     href: "/capabilities#electro-mechanical",
-    cls: "chamber-electro",
-    variant: "c" as const,
   },
 ];
 
@@ -50,7 +47,7 @@ function Title({
   return (
     <h3
       id={id}
-      className={`font-display text-[clamp(1.85rem,1.5rem+2.6vw,3.3rem)] font-semibold leading-[1.02] tracking-[-0.025em] ${className}`}
+      className={`font-display text-[clamp(1.85rem,1.5rem+2.6vw,3.3rem)] font-semibold leading-[1.04] tracking-[-0.025em] ${className}`}
     >
       <span className="relative inline-block transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-2">
         {name}
@@ -80,22 +77,16 @@ function Arrow() {
   );
 }
 
-function Idx({ n, className = "" }: { n: string; className?: string }) {
-  return (
-    <span
-      className={`label-mono !text-[0.66rem] text-fg-faint transition-colors duration-200 group-hover:text-signal ${className}`}
-    >
-      {n}
-    </span>
-  );
-}
-
-function GhostIndex({ n, pos }: { n: string; pos: string }) {
+/* The engraving: outlined numeral confined to its own column.
+   Bounded width, leading-none, pointer-events none — it cannot
+   escape its cell, so it can never collide with readable content. */
+function EngravedIndex({ n }: { n: string }) {
   return (
     <span
       aria-hidden="true"
-      className={`pointer-events-none absolute hidden select-none font-mono text-[9rem] font-semibold leading-none xl:block ${pos}`}
-      style={{ WebkitTextStroke: "1px rgb(237 240 242 / 0.13)", color: "transparent" }}
+      data-probe="engraving"
+      className="hidden w-[clamp(4.75rem,8.5vw,8rem)] shrink-0 select-none items-center justify-start font-mono text-[clamp(3.4rem,6vw,6.2rem)] font-semibold leading-none tracking-[-0.02em] lg:flex"
+      style={{ WebkitTextStroke: "1px rgb(237 240 242 / 0.16)", color: "transparent" }}
     >
       {n}
     </span>
@@ -113,70 +104,36 @@ export function EngineeringChambers({ withIds = false }: { withIds?: boolean }) 
             <section
               {...(withIds ? { id: d.id } : {})}
               aria-labelledby={headingId ? headingId : undefined}
-              className={`chamber ${d.cls} scroll-mt-28 border-t border-line text-fg last:border-b ${
-                i === 0 ? "border-t-0" : ""
-              }`}
+              className="chamber scroll-mt-28 border-t border-line text-fg last:border-b"
             >
               <Link
                 href={d.href}
-                className="group relative mx-auto block max-w-[84rem] px-5 py-14 md:px-10 md:py-20"
+                data-probe="chamber-row"
+                className="group relative mx-auto block max-w-[84rem] px-5 py-12 md:px-10 md:py-16 lg:py-20"
                 aria-label={`${d.name} — view capability`}
               >
-                {d.variant === "a" && (
-                  <>
-                    <GhostIndex n={idx} pos="right-10 top-1/2 -translate-y-1/2" />
-                    <div className="relative grid gap-6 lg:grid-cols-[3rem_1fr_auto] lg:items-center lg:gap-14">
-                      <Idx n={idx} />
-                      <Title id={headingId} name={d.name} />
-                      <div className="flex items-end gap-10">
-                        <p className="max-w-xs shrink-0 text-sm leading-relaxed text-fg-muted md:text-right">
-                          {d.line}
-                        </p>
-                        <span className="hidden lg:block">
-                          <Arrow />
-                        </span>
-                      </div>
-                    </div>
-                  </>
-                )}
+                {/* row architecture: index | title | description | indicator */}
+                <div className="grid items-center gap-x-10 gap-y-5 lg:grid-cols-[auto_minmax(0,1fr)_minmax(0,22rem)_2rem] lg:gap-x-14">
+                  <EngravedIndex n={idx} />
 
-                {d.variant === "b" && (
-                  <>
-                    <GhostIndex n={idx} pos="left-10 top-1/2 -translate-y-1/2" />
-                    <div className="relative grid gap-6 lg:grid-cols-[minmax(0,20rem)_1fr_3rem] lg:items-center lg:gap-14">
-                      <Idx n={idx} className="lg:order-3 lg:self-start lg:text-right" />
-                      <Title
-                        id={headingId}
-                        name={d.name}
-                        className="lg:order-2 lg:text-right"
-                      />
-                      <div className="flex items-end gap-10 max-lg:max-w-md lg:order-1">
-                        <p className="shrink-0 text-sm leading-relaxed text-fg-muted">
-                          {d.line}
-                        </p>
-                        <span className="hidden lg:block">
-                          <Arrow />
-                        </span>
-                      </div>
-                    </div>
-                  </>
-                )}
+                  {/* compact index — mobile/tablet only */}
+                  <span
+                    aria-hidden="true"
+                    className="label-mono text-fg-faint transition-colors duration-200 group-hover:text-signal lg:hidden"
+                  >
+                    {idx}
+                  </span>
 
-                {d.variant === "c" && (
-                  <>
-                    <GhostIndex n={idx} pos="bottom-4 right-[24%]" />
-                    <div className="relative">
-                      <Idx n={idx} />
-                      <div className="mt-5 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
-                        <Title id={headingId} name={d.name} />
-                        <div className="flex items-end gap-10 lg:pb-2">
-                          <p className="max-w-md text-sm leading-relaxed text-fg-muted">{d.line}</p>
-                          <Arrow />
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
+                  <Title id={headingId} name={d.name} />
+
+                  <p className="text-sm leading-relaxed text-fg-muted lg:max-w-[22rem]">
+                    {d.line}
+                  </p>
+
+                  <span className="hidden justify-self-end lg:block">
+                    <Arrow />
+                  </span>
+                </div>
               </Link>
             </section>
           </Inview>

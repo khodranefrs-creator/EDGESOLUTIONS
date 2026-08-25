@@ -43,7 +43,7 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-[84rem] gap-14 px-5 py-20 md:px-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20 lg:py-28">
           <div>
             <Inview>
-              <p className="label-mono !text-[0.62rem] text-fg-faint">Direct lines</p>
+              <p className="label-mono text-fg-faint">Direct lines</p>
               <h2 className="display-m mt-6 !text-[clamp(1.9rem,1.4rem+2.2vw,3rem)]">
                 ClearEdge Solutions,&nbsp;Inc.
               </h2>
@@ -61,7 +61,7 @@ export default function ContactPage() {
                     key={row.k}
                     className="flex flex-col justify-between gap-1 border-b border-line py-4 sm:flex-row sm:items-baseline sm:gap-8"
                   >
-                    <dt className="meta-mono shrink-0 !text-[0.62rem] text-fg-faint">{row.k}</dt>
+                    <dt className="meta-mono shrink-0 text-fg-faint">{row.k}</dt>
                     <dd className="text-sm font-medium sm:text-right">
                       {row.href ? (
                         <a href={row.href} className="transition-colors hover:text-accent">

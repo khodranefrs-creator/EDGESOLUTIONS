@@ -71,7 +71,7 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
               }`}
             >
               <span
-                className={`label-mono block !text-[0.58rem] transition-colors duration-200 ${
+                className={`label-mono block transition-colors duration-200 ${
                   selected ? "!text-signal-deep" : "text-fg-faint group-hover:text-fg-muted"
                 }`}
               >
@@ -103,10 +103,10 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
           {/* specimen plate */}
           <figure className="plate reg-corners relative m-0 bg-white p-4 sm:p-5">
             <figcaption className="flex items-baseline justify-between px-1 pt-1">
-              <span className="label-mono !text-[0.62rem] text-fg-faint">
+              <span className="label-mono text-fg-faint">
                 FIG. {String(activeIndex + 2).padStart(2, "0")}
               </span>
-              <span className="label-mono hidden !text-[0.56rem] text-fg-faint sm:block">
+              <span className="label-mono hidden text-fg-faint sm:block">
                 {active.id === "fiber-optic" ? "DETAIL — MATERIAL STUDY" : "SCHEMATIC REPRESENTATION"}
               </span>
             </figcaption>
@@ -136,7 +136,7 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
                     <BoxComposition className="h-auto max-h-[300px] w-full max-w-lg" />
                   )}
                 </div>
-                <p className="meta-mono absolute bottom-3 left-4 z-[1] !text-[0.54rem]" aria-hidden="true">
+                <p className="meta-mono absolute bottom-3 left-4 z-[1]" aria-hidden="true">
                   {active.shortName.toUpperCase()}
                 </p>
               </div>
@@ -144,7 +144,7 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
 
             <p className="mt-4 flex items-baseline justify-between gap-4 border-t border-line px-1 pb-1 pt-3.5">
               <span className="text-sm font-medium text-fg">{active.name}</span>
-              <span className="label-mono shrink-0 !text-[0.56rem] text-fg-faint">
+              <span className="label-mono shrink-0 text-fg-faint">
                 {active.id.toUpperCase()}
               </span>
             </p>
@@ -153,7 +153,7 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
           {/* documentation register */}
           <dl className="flex flex-col justify-center border-t border-line-strong">
             <div className="grid grid-cols-[6.5rem_1fr] gap-x-6 py-5 sm:grid-cols-[7.5rem_1fr]">
-              <dt className="label-mono pt-1.5 !text-[0.58rem] text-fg-faint">Family</dt>
+              <dt className="label-mono pt-1.5 text-fg-faint">Family</dt>
               <dd>
                 <h3 id={headingId} className="display-product">
                   {active.name}
@@ -162,11 +162,11 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
               </dd>
             </div>
             <div className="grid grid-cols-[6.5rem_1fr] gap-x-6 border-t border-line py-5 sm:grid-cols-[7.5rem_1fr]">
-              <dt className="label-mono pt-1 !text-[0.58rem] text-fg-faint">Profile</dt>
+              <dt className="label-mono pt-1 text-fg-faint">Profile</dt>
               <dd className="type-body text-fg-muted">{active.description}</dd>
             </div>
             <div className="grid grid-cols-[6.5rem_1fr] gap-x-6 border-t border-line py-5 sm:grid-cols-[7.5rem_1fr]">
-              <dt className="label-mono pt-1.5 !text-[0.58rem] text-fg-faint">Applications</dt>
+              <dt className="label-mono pt-1.5 text-fg-faint">Applications</dt>
               <dd>
                 <ul className="flex flex-wrap gap-x-6 gap-y-1.5">
                   {active.applications.map((appId) => {
@@ -184,7 +184,7 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
               </dd>
             </div>
             <div className="grid grid-cols-[6.5rem_1fr] gap-x-6 border-t border-line py-5 sm:grid-cols-[7.5rem_1fr]">
-              <dt className="label-mono pt-1 !text-[0.58rem] text-fg-faint">Engage</dt>
+              <dt className="label-mono pt-1 text-fg-faint">Engage</dt>
               <dd>
                 <Link
                   href={`/contact?capability=${active.id}#quote-form`}
@@ -197,7 +197,7 @@ export function ProductObservatory({ headingId }: { headingId?: string }) {
                 </Link>
               </dd>
             </div>
-            <p className="meta-mono mt-auto hidden justify-end gap-3 pb-1 !text-[0.54rem] text-fg-faint lg:flex" aria-hidden="true">
+            <p className="meta-mono mt-auto hidden justify-end gap-3 pb-1 text-fg-faint lg:flex" aria-hidden="true">
               CATALOG SHEET {String(activeIndex + 1).padStart(2, "0")} / 03
             </p>
           </dl>

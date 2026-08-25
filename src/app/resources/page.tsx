@@ -83,7 +83,7 @@ export default function ResourcesPage() {
                     className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-6 py-7 sm:gap-x-10 md:py-9"
                     aria-label={`${entry.title} — open`}
                   >
-                    <span className="label-mono w-10 shrink-0 !text-[0.62rem] text-signal-deep">
+                    <span className="label-mono w-10 shrink-0 text-signal-deep">
                       {entry.index}
                     </span>
                     <span>

@@ -22,7 +22,7 @@ export function PageHeader({
             <p className="label-mono text-fg-faint">{eyebrow}</p>
             {meta ? (
               <span
-                className="label-mono hidden !text-[0.62rem] text-fg-faint sm:block"
+                className="label-mono hidden text-fg-faint sm:block"
                 aria-hidden="true"
               >
                 {meta}

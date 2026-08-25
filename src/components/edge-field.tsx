@@ -49,10 +49,10 @@ export function EdgeField() {
       <div className="relative hidden select-none lg:block">
         {/* register headers — the two poles of the diagram */}
         <div aria-hidden="true" className="relative mb-2 h-4">
-          <p className="label-mono absolute right-[81%] whitespace-nowrap !text-[0.56rem] text-fg-faint">
+          <p className="label-mono absolute right-[81%] whitespace-nowrap text-fg-faint">
             Industry sectors
           </p>
-          <p className="label-mono absolute left-[81%] pl-10 !text-[0.56rem] text-fg-faint">
+          <p className="label-mono absolute left-[81%] pl-10 text-fg-faint">
             Product families
           </p>
         </div>
@@ -66,8 +66,8 @@ export function EdgeField() {
             className="absolute inset-0 h-full w-full text-fg-muted"
           >
             {/* faint column rails */}
-            <line x1="218" y1="24" x2="218" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.22" />
-            <line x1="782" y1="24" x2="782" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.22" />
+            <line x1="218" y1="24" x2="218" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.28" />
+            <line x1="782" y1="24" x2="782" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.28" />
 
             {EDGES.map(({ industry, family }) => {
               const iy = INDUSTRY_Y[industry];
@@ -78,12 +78,12 @@ export function EdgeField() {
               return (
                 <path
                   key={`${industry}-${family}`}
-                  d={`M224 ${iy}C460 ${iy} 520 ${fy} ${fx - 14} ${fy}`}
+                  d={`M225 ${iy}C460 ${iy} 520 ${fy} ${fx - 8} ${fy}`}
                   stroke={live ? "#0092fc" : "currentColor"}
-                  strokeWidth={live ? 2 : 1.25}
+                  strokeWidth={live ? 2 : 1.5}
                   strokeLinecap="round"
-                  strokeDasharray={live ? "none" : "0.1 8"}
-                  opacity={live ? 1 : dim ? 0.15 : 0.55}
+                  strokeDasharray={live ? "none" : "0.1 6.5"}
+                  opacity={live ? 1 : dim ? 0.15 : 0.75}
                   vectorEffect="non-scaling-stroke"
                   className="transition-all duration-300"
                 />
@@ -101,7 +101,7 @@ export function EdgeField() {
                   width="14"
                   height="14"
                   stroke={live ? "#0092fc" : "currentColor"}
-                  strokeWidth={live ? 2 : 1.5}
+                  strokeWidth={live ? 2 : 1.75}
                   fill={live ? "#0092fc" : "var(--bg)"}
                   opacity={dim ? 0.28 : 1}
                   vectorEffect="non-scaling-stroke"
@@ -120,7 +120,7 @@ export function EdgeField() {
                   key={fam.id}
                   cx={x}
                   cy={y}
-                  r={live ? 7.5 : 6}
+                  r={live ? 7.5 : 6.5}
                   fill={live ? "#0092fc" : "var(--bg)"}
                   stroke={live ? "#0092fc" : "currentColor"}
                   strokeWidth="1.75"
@@ -151,7 +151,7 @@ export function EdgeField() {
                 }`}
                 style={{ top: `${(INDUSTRY_Y[ind.id] / 620) * 100}%` }}
               >
-                <span className="label-mono block !text-[0.58rem] text-fg-faint">
+                <span className="label-mono block text-fg-faint">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span
@@ -181,7 +181,7 @@ export function EdgeField() {
                 }`}
                 style={{ top: `${(FAMILY_XY[fam.id].y / 620) * 100}%` }}
               >
-                <p className="label-mono block !text-[0.58rem] text-fg-faint">
+                <p className="label-mono block text-fg-faint">
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <p
@@ -192,7 +192,7 @@ export function EdgeField() {
                   {fam.shortName}
                 </p>
                 <p
-                  className={`label-mono mt-1.5 block !text-[0.54rem] transition-colors duration-300 ${
+                  className={`label-mono mt-1.5 block transition-colors duration-300 ${
                     live ? "!text-signal-deep" : "text-fg-faint"
                   }`}
                 >
@@ -210,19 +210,19 @@ export function EdgeField() {
         >
           <span className="flex items-center gap-2.5">
             <span className="inline-block h-[11px] w-[11px] border-[1.5px] border-current bg-bg" />
-            <span className="label-mono !text-[0.54rem] text-fg-faint">Industry sector</span>
+            <span className="label-mono text-fg-faint">Industry sector</span>
           </span>
           <span className="flex items-center gap-2.5">
             <span className="node-signal !h-[11px] !w-[11px] !bg-transparent ring-[1.5px] ring-inset ring-current" />
-            <span className="label-mono !text-[0.54rem] text-fg-faint">Product family</span>
+            <span className="label-mono text-fg-faint">Product family</span>
           </span>
           <span className="flex items-center gap-2.5">
             <span className="inline-block h-px w-7 bg-signal" />
-            <span className="label-mono !text-[0.54rem] text-fg-faint">Traced relation</span>
+            <span className="label-mono text-fg-faint">Traced relation</span>
           </span>
           <span className="flex items-center gap-2.5">
             <span className="inline-block h-px w-7 border-t border-dotted border-current [border-top-width:2px]" />
-            <span className="label-mono !text-[0.54rem] text-fg-faint">Verified relation</span>
+            <span className="label-mono text-fg-faint">Verified relation</span>
           </span>
         </div>
       </div>
@@ -237,7 +237,7 @@ export function EdgeField() {
             return (
               <li key={ind.id} className="border-b border-line py-8">
                 <div className="flex items-baseline gap-4">
-                  <span className="label-mono !text-[0.62rem] text-signal-deep">
+                  <span className="label-mono text-signal-deep">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="font-display text-[clamp(1.5rem,1.3rem+1.8vw,2rem)] font-semibold tracking-tight">

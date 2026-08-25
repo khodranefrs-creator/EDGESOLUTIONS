@@ -103,7 +103,7 @@ export default function AboutPage() {
           {/* the work */}
           <Inview delay={120}>
             <div className="mt-24">
-              <h3 className="label-mono !text-[0.62rem] text-fg-faint">The work</h3>
+              <h3 className="label-mono text-fg-faint">The work</h3>
               <ul className="mt-7 border-t border-line-strong">
                 {productFamilies.map((family) => (
                   <li key={family.id} className="border-b border-line">
@@ -197,7 +197,7 @@ export default function AboutPage() {
                 { k: "Website", v: "www.ClearEdgeSolutions.com", href: company.url },
               ].map((row) => (
                 <div key={row.k} className="flex flex-col justify-between gap-1 border-b border-line py-4 sm:flex-row sm:items-baseline sm:gap-8">
-                  <dt className="meta-mono shrink-0 !text-[0.62rem] text-fg-faint">{row.k}</dt>
+                  <dt className="meta-mono shrink-0 text-fg-faint">{row.k}</dt>
                   <dd className="text-sm font-medium sm:text-right">
                     {row.href ? (
                       <a href={row.href} className="transition-colors hover:text-accent">

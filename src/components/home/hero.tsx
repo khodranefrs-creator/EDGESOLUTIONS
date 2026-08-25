@@ -86,8 +86,8 @@ export function Hero() {
         >
           <div className="plate reg-corners tech-grid bg-white px-7 py-7 text-fg-muted sm:px-10 sm:py-9">
             <figcaption className="flex items-baseline justify-between gap-4">
-              <span className="label-mono !text-[0.62rem] text-fg-faint">FIG. 01</span>
-              <span className="label-mono hidden !text-[0.56rem] text-fg-faint sm:block">
+              <span className="label-mono text-fg-faint">FIG. 01</span>
+              <span className="label-mono hidden text-fg-faint sm:block">
                 REPRESENTATIVE ASSEMBLY
               </span>
             </figcaption>
@@ -102,7 +102,7 @@ export function Hero() {
             </div>
             <p className="mt-5 border-t border-line pt-4 text-sm font-medium text-fg">
               Multi-fiber trunk cable assembly
-              <span className="label-mono ml-3 !text-[0.58rem] font-medium text-fg-faint">
+              <span className="label-mono ml-3 font-medium text-fg-faint">
                 FIBER OPTIC FAMILY
               </span>
             </p>
@@ -112,8 +112,8 @@ export function Hero() {
 
       {/* quiet technical metadata strip */}
       <div className="relative mx-auto flex max-w-[88rem] flex-wrap items-center justify-between gap-x-8 gap-y-2 px-5 pb-8 md:px-10">
-        <p className="label-mono !text-[0.6rem] text-fg-faint">San Jose, California, USA</p>
-        <p className="label-mono hidden !text-[0.58rem] text-fg-faint sm:block" aria-hidden="true">
+        <p className="label-mono text-fg-faint">San Jose, California, USA</p>
+        <p className="label-mono hidden text-fg-faint sm:block" aria-hidden="true">
           37.35°N — 121.95°W
         </p>
       </div>

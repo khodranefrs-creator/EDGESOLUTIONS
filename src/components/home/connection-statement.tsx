@@ -53,8 +53,8 @@ export function ConnectionStatement() {
           <Inview delay={220} className="lg:self-end">
             <div className="border-l border-line-strong pl-8 md:pl-10">
               <p className="flex items-baseline justify-between gap-4">
-                <span className="label-mono !text-[0.62rem] text-fg-faint">Operating principles</span>
-                <span className="label-mono !text-[0.62rem] text-signal" aria-hidden="true">
+                <span className="label-mono text-fg-faint">Operating principles</span>
+                <span className="label-mono text-signal" aria-hidden="true">
                   04
                 </span>
               </p>
@@ -66,7 +66,7 @@ export function ConnectionStatement() {
                       i > 0 ? "border-t border-line" : ""
                     }`}
                   >
-                    <span className="label-mono pt-[0.2rem] !text-[0.58rem] text-fg-faint">
+                    <span className="label-mono pt-[0.2rem] text-fg-faint">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div>

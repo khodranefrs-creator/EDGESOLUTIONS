@@ -27,7 +27,7 @@ export function SiteFooter() {
               Designer and manufacturer of high performance fiber optic and
               copper cabling systems, and electro-mechanical assemblies.
             </p>
-            <p className="label-mono mt-6 !text-[0.62rem] text-fg-faint">
+            <p className="label-mono mt-6 text-fg-faint">
               {company.slogan}
             </p>
           </div>
@@ -35,7 +35,7 @@ export function SiteFooter() {
           {/* directory columns */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4">
             <nav aria-label="Footer index">
-              <h2 className="label-mono !text-[0.62rem] text-fg-faint">Index</h2>
+              <h2 className="label-mono text-fg-faint">Index</h2>
               <ul className="mt-4 space-y-2.5">
                 {[{ href: "/", label: "Home" }, ...navItems].map((item) => (
                   <li key={item.href}>
@@ -51,7 +51,7 @@ export function SiteFooter() {
             </nav>
 
             <nav aria-label="Footer product families">
-              <h2 className="label-mono !text-[0.62rem] text-fg-faint">Families</h2>
+              <h2 className="label-mono text-fg-faint">Families</h2>
               <ul className="mt-4 space-y-2.5">
                 {productFamilies.map((f) => (
                   <li key={f.id}>
@@ -67,7 +67,7 @@ export function SiteFooter() {
             </nav>
 
             <nav aria-label="Footer disciplines">
-              <h2 className="label-mono !text-[0.62rem] text-fg-faint">Disciplines</h2>
+              <h2 className="label-mono text-fg-faint">Disciplines</h2>
               <ul className="mt-4 space-y-2.5">
                 {capabilities.map((c) => (
                   <li key={c.id}>
@@ -83,7 +83,7 @@ export function SiteFooter() {
             </nav>
 
             <nav aria-label="Footer applications">
-              <h2 className="label-mono !text-[0.62rem] text-fg-faint">Applications</h2>
+              <h2 className="label-mono text-fg-faint">Applications</h2>
               <ul className="mt-4 space-y-2.5">
                 {industries.map((ind) => (
                   <li key={ind.id}>
@@ -125,7 +125,7 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-[84rem] flex-col gap-3 px-5 py-6 text-xs text-fg-faint sm:flex-row sm:items-center sm:justify-between md:px-10">
           <p>© {year} {company.name}. All rights reserved.</p>
           <p className="flex items-center gap-6">
-            <span className="label-mono hidden !text-[0.6rem] md:inline" aria-hidden="true">
+            <span className="label-mono hidden md:inline" aria-hidden="true">
               37.35° N — 121.95° W · SAN JOSE
             </span>
             <span className="flex gap-6">

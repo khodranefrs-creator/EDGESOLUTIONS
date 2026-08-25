@@ -40,7 +40,7 @@ export default function CapabilitiesPage() {
       <section id="engineering" className="theme-dark scroll-mt-28 border-t border-line/60 bg-bg-deep text-fg" aria-labelledby="collab-heading">
         <div className="mx-auto grid max-w-[84rem] gap-12 px-5 py-20 md:px-10 md:py-32 lg:grid-cols-2 lg:gap-20">
           <Inview>
-            <p className="label-mono !text-[0.62rem] text-accent">04</p>
+            <p className="label-mono text-accent">04</p>
             <h2 id="collab-heading" className="display-m mt-5 max-w-xl">
               Engineering — a collaboration, not a&nbsp;handoff.
             </h2>
@@ -52,7 +52,7 @@ export default function CapabilitiesPage() {
           </Inview>
           <Inview delay={140} className="flex flex-col justify-end">
             <div id="contract-manufacturing" className="scroll-mt-28 border-t border-line pt-10">
-              <p className="label-mono !text-[0.62rem] text-accent">05</p>
+              <p className="label-mono text-accent">05</p>
               <h3 className="display-m mt-5 max-w-xl !text-[clamp(1.9rem,1.4rem+2.4vw,3.2rem)]">
                 Contract manufacturing — build-to-print&nbsp;production.
               </h3>
