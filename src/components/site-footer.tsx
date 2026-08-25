@@ -14,15 +14,16 @@ export function SiteFooter() {
         <div className="grid gap-10 lg:grid-cols-[1.4fr_2fr] lg:gap-20">
           <div>
             <Link href="/" aria-label="ClearEdge Solutions — home" className="inline-flex">
-              <span className="nameplate">
-                <Image
-                  src={mainlogo}
-                  alt="ClearEdge Solutions"
-                  sizes="130px"
-                  className="h-11 w-auto"
-                />
-              </span>
+              <Image
+                src={mainlogo}
+                alt="ClearEdge Solutions"
+                sizes="150px"
+                className="footer-logo h-auto w-[130px] md:w-[150px]"
+              />
             </Link>
+            <p className="mt-5 font-display text-sm font-semibold tracking-tight">
+              {company.name}
+            </p>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-fg-muted">
               Designer and manufacturer of high performance fiber optic and
               copper cabling systems, and electro-mechanical assemblies.
@@ -35,7 +36,7 @@ export function SiteFooter() {
           {/* directory columns */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4">
             <nav aria-label="Footer index">
-              <h2 className="label-mono text-fg-faint">Index</h2>
+              <p className="footer-head text-fg-faint">Index</p>
               <ul className="mt-4 space-y-2.5">
                 {[{ href: "/", label: "Home" }, ...navItems].map((item) => (
                   <li key={item.href}>
@@ -51,7 +52,7 @@ export function SiteFooter() {
             </nav>
 
             <nav aria-label="Footer product families">
-              <h2 className="label-mono text-fg-faint">Families</h2>
+              <p className="footer-head text-fg-faint">Families</p>
               <ul className="mt-4 space-y-2.5">
                 {productFamilies.map((f) => (
                   <li key={f.id}>
@@ -67,7 +68,7 @@ export function SiteFooter() {
             </nav>
 
             <nav aria-label="Footer disciplines">
-              <h2 className="label-mono text-fg-faint">Disciplines</h2>
+              <p className="footer-head text-fg-faint">Disciplines</p>
               <ul className="mt-4 space-y-2.5">
                 {capabilities.map((c) => (
                   <li key={c.id}>
@@ -83,7 +84,7 @@ export function SiteFooter() {
             </nav>
 
             <nav aria-label="Footer applications">
-              <h2 className="label-mono text-fg-faint">Applications</h2>
+              <p className="footer-head text-fg-faint">Applications</p>
               <ul className="mt-4 space-y-2.5">
                 {industries.map((ind) => (
                   <li key={ind.id}>

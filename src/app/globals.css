@@ -45,6 +45,13 @@
      along it. Coefficient calibrated against rendered font metrics. */
   --hero-type: clamp(4.5rem, 13vw, 13rem);
   --hero-drop: calc(3.3rem + var(--hero-type) * 1.648);
+
+  /* section envelopes — unequal rhythm by design. Immersive statements
+     breathe, standard chapters carry information, utility bands compress.
+     Adjacent sections never share an identical vertical envelope. */
+  --env-immersive: clamp(7rem, 11vw, 12rem);
+  --env-standard: clamp(4.5rem, 7vw, 8rem);
+  --env-utility: clamp(3.25rem, 5vw, 5rem);
 }
 
 /* graphite context — statement, disciplines, resolution, colophon */
@@ -197,9 +204,12 @@ body {
 }
 
 /* mono is metadata only — never decoration.
-   ONE annotation voice site-wide: 11px, uppercase, tabular. */
+   ONE annotation voice site-wide: 11px, uppercase, tabular.
+   .footer-head is the same voice applied to footer column labels —
+   deliberately NOT headings (see semantic repair §19). */
 .label-mono,
-.meta-mono {
+.meta-mono,
+.footer-head {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.13em;
@@ -306,6 +316,21 @@ body {
   border-bottom: 1px solid var(--line);
 }
 
+/* ----------------------------------------------- section envelopes
+   Rhythm registers bound to the tokens above. */
+.env-immersive {
+  padding-block: var(--env-immersive);
+}
+.env-standard {
+  padding-block: var(--env-standard);
+}
+.env-utility {
+  padding-block: var(--env-utility);
+}
+.env-standard-top {
+  padding-top: var(--env-standard);
+}
+
 /* ------------------------------------------------- blue marker system
    EXACTLY two blue marks exist in this design system.
 
@@ -334,17 +359,37 @@ body {
   background: var(--signal);
 }
 
-/* nameplate — official logo presentation on non-white grounds.
-   The single approved color logo (blue + graphite artwork) is shown
-   unaltered on a white brand plate: same identity as the header,
-   deliberate as an object, correct on graphite. */
-.nameplate {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+/* footer logo — monochrome white presentation of the single approved
+   mark on the graphite colophon ground. The asset itself is blue +
+   graphite artwork designed for light grounds; a pure CSS luminance
+   inversion preserves the exact silhouette and natural aspect ratio
+   with no second asset, no plate, no border, no framing. */
+.footer-logo {
+  filter: brightness(0) invert(1);
+}
+
+/* structure band — physical-evidence transition crop between the
+   system map and the specification register. The one approved
+   photograph, untreated, seen at high magnification: full-bleed
+   horizontal band, hairline base where paper becomes warm. */
+.band-structure {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
   background: #ffffff;
-  border: 1px solid var(--line-strong);
-  padding: 0.6rem 0.85rem;
+  aspect-ratio: 21 / 9;
+}
+@media (max-width: 767px) {
+  .band-structure {
+    aspect-ratio: 16 / 7;
+  }
+}
+.band-structure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(2.05);
+  transform-origin: 50% 58%;
 }
 
 /* --------------------------------------------------- specimen plates

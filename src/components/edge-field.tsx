@@ -47,16 +47,6 @@ export function EdgeField() {
     <div>
       {/* -------------------------------------------- desktop system map */}
       <div className="relative hidden select-none lg:block">
-        {/* register headers — the two poles of the diagram */}
-        <div aria-hidden="true" className="relative mb-2 h-4">
-          <p className="label-mono absolute right-[81%] whitespace-nowrap text-fg-faint">
-            Industry sectors
-          </p>
-          <p className="label-mono absolute left-[81%] pl-10 text-fg-faint">
-            Product families
-          </p>
-        </div>
-
         <div className="relative h-[600px]">
           <svg
             aria-hidden="true"
@@ -171,7 +161,6 @@ export function EdgeField() {
               active !== null &&
               EDGES.some((e) => e.family === fam.id && e.industry === active);
             const dim = !!active && !live;
-            const servedBy = EDGES.filter((e) => e.family === fam.id).length;
             return (
               <div
                 key={fam.id}
@@ -190,13 +179,6 @@ export function EdgeField() {
                   }`}
                 >
                   {fam.shortName}
-                </p>
-                <p
-                  className={`label-mono mt-1.5 block transition-colors duration-300 ${
-                    live ? "!text-signal-deep" : "text-fg-faint"
-                  }`}
-                >
-                  Serves {String(servedBy).padStart(2, "0")} industries
                 </p>
               </div>
             );

@@ -29,7 +29,7 @@ const principles = [
 export function ConnectionStatement() {
   return (
     <section className="theme-dark bg-bg-deep text-fg" aria-labelledby="connection-heading">
-      <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
+      <div className="env-immersive mx-auto max-w-[84rem] px-5 md:px-10">
         <div className="grid gap-y-16 lg:grid-cols-[1.42fr_1fr] lg:gap-x-28">
           <div>
             <Inview>

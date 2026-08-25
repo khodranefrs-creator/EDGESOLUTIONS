@@ -3,12 +3,66 @@ import { Inview } from "@/components/inview";
 import { company } from "@/lib/site";
 
 /* 07 — CONNECTION RESOLUTION
-   Graphite, left-aligned. The signal that entered at the hero
-   returns here, passes through several nodes across the upper
-   field, and terminates beside the CTA — the whole homepage
-   narrative resolving into a single action. */
+   Two registers, one component:
+   · resolution — homepage only. Graphite, left-aligned. The signal
+     that entered at the hero returns here, passes through several
+     nodes across the upper field, and terminates beside the CTA.
+   · utility — every secondary route. A compact band under a strong
+     rule: statement at reduced scale, actions to the right, direct
+     lines beneath. No node drawing, no cinematic composition — the
+     oversized resolution belongs to the homepage alone. */
 
-export function CTASection({ id = "cta" }: { id?: string }) {
+type Variant = "resolution" | "utility";
+
+export function CTASection({
+  id = "cta",
+  variant = "utility",
+}: {
+  id?: string;
+  variant?: Variant;
+}) {
+  if (variant === "utility") {
+    return (
+      <section
+        id={id}
+        className="theme-dark bg-bg-deep text-fg"
+        aria-labelledby="cta-heading"
+      >
+        <div className="mx-auto max-w-[84rem] px-5 md:px-10">
+          <div className="env-utility grid gap-8 border-t border-line-strong md:grid-cols-[1fr_auto] md:items-center md:gap-16">
+            <div>
+              <p className="label-mono text-fg-faint">Contact</p>
+              <h2 id="cta-heading" className="display-product mt-3 max-w-xl text-balance">
+                Tell us what needs to&nbsp;connect.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-fg-muted">
+                or reach us directly —{" "}
+                <a href={`tel:${company.phoneHref}`} className="link-quiet !text-fg">
+                  {company.phone}
+                </a>{" "}
+                ·{" "}
+                <a href={`mailto:${company.email}`} className="link-quiet !text-fg">
+                  {company.email}
+                </a>
+              </p>
+            </div>
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
+              <Link href="/contact#quote-form" className="btn btn-primary !px-8 !py-3.5 !text-sm">
+                Request a Quote
+              </Link>
+              <Link href="/contact" className="text-link !text-fg">
+                Contact Us
+                <svg className="text-link-arrow" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                  <path d="M0 5h12M8 1l4 4-4 4" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id={id}

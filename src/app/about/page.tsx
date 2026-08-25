@@ -103,7 +103,7 @@ export default function AboutPage() {
           {/* the work */}
           <Inview delay={120}>
             <div className="mt-24">
-              <h3 className="label-mono text-fg-faint">The work</h3>
+              <p className="label-mono text-fg-faint">The work</p>
               <ul className="mt-7 border-t border-line-strong">
                 {productFamilies.map((family) => (
                   <li key={family.id} className="border-b border-line">

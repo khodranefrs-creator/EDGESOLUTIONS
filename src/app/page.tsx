@@ -5,6 +5,7 @@ import { ProductObservatory } from "@/components/product-observatory";
 import { EngineeringChambers } from "@/components/engineering-chambers";
 import { EdgeField } from "@/components/edge-field";
 import { Confidence } from "@/components/home/confidence";
+import { EdgeBand } from "@/components/home/edge-band";
 import { CTASection } from "@/components/cta-section";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 /* Homepage as one continuous connection — the signal enters at the
    hero and resolves at contact. Seven movements:
    01 IDENTITY · 02 THE CONNECTION · 03 PRODUCTS · 04 ENGINEERING
-   05 APPLICATIONS · 06 CONFIDENCE · 07 CONTACT                    */
+   05 APPLICATIONS · 06 STRUCTURE / CONFIDENCE · 07 CONTACT       */
 
 export default function HomePage() {
   return (
@@ -31,7 +32,7 @@ export default function HomePage() {
         aria-labelledby="home-products-heading"
         className="scroll-mt-20 bg-bg text-fg"
       >
-        <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
+        <div className="env-standard mx-auto max-w-[84rem] px-5 md:px-10">
           <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
             <h2 id="home-products-heading" className="display-functional mt-6 max-w-3xl">
               Three families. One connection
@@ -52,7 +53,7 @@ export default function HomePage() {
         aria-labelledby="home-engineering-heading"
         className="theme-dark scroll-mt-20 bg-bg-deep text-fg"
       >
-        <div className="mx-auto max-w-[84rem] px-5 pb-14 pt-24 md:px-10 md:pb-16 md:pt-36">
+        <div className="env-standard-top mx-auto max-w-[84rem] px-5 pb-12 md:px-10 md:pb-14">
           <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
             <h2 id="home-engineering-heading" className="display-functional max-w-3xl">
               Every discipline has its own&nbsp;behavior.
@@ -71,7 +72,7 @@ export default function HomePage() {
         aria-labelledby="home-applications-heading"
         className="scroll-mt-20 bg-bg text-fg"
       >
-        <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
+        <div className="env-standard mx-auto max-w-[84rem] px-5 md:px-10">
           <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
             <h2 id="home-applications-heading" className="display-l max-w-2xl">
               Where the connections&nbsp;go.
@@ -87,11 +88,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 06 — confidence */}
+      {/* 06 — physical structure, then confidence */}
+      <EdgeBand />
       <Confidence />
 
       {/* 07 — contact */}
-      <CTASection id="contact" />
+      <CTASection id="contact" variant="resolution" />
     </>
   );
 }
