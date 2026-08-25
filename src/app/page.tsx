@@ -32,10 +32,15 @@ export default function HomePage() {
         className="scroll-mt-20 bg-bg text-fg"
       >
         <div className="mx-auto max-w-[84rem] px-5 py-24 md:px-10 md:py-36">
-          <h2 id="home-products-heading" className="display-l mt-6 max-w-3xl">
-            Three families. One connection
-            infrastructure.
-          </h2>
+          <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
+            <h2 id="home-products-heading" className="display-functional mt-6 max-w-3xl">
+              Three families. One connection
+              infrastructure.
+            </h2>
+            <p className="label-mono hidden pb-2 !text-[0.58rem] text-fg-faint sm:block" aria-hidden="true">
+              CATALOG — 03 FAMILIES
+            </p>
+          </div>
 
           <ProductObservatory />
         </div>
@@ -48,10 +53,14 @@ export default function HomePage() {
         className="theme-dark scroll-mt-20 bg-bg-deep text-fg"
       >
         <div className="mx-auto max-w-[84rem] px-5 pb-14 pt-24 md:px-10 md:pb-16 md:pt-36">
-          <p className="label-mono !text-[0.62rem] text-signal">Capabilities</p>
-          <h2 id="home-engineering-heading" className="display-l mt-6 max-w-3xl">
-            Every discipline has its own&nbsp;behavior.
-          </h2>
+          <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
+            <h2 id="home-engineering-heading" className="display-functional max-w-3xl">
+              Every discipline has its own&nbsp;behavior.
+            </h2>
+            <p className="label-mono hidden pb-2 !text-[0.58rem] text-fg-faint sm:block" aria-hidden="true">
+              DISCIPLINES — 05
+            </p>
+          </div>
         </div>
         <EngineeringChambers />
       </section>

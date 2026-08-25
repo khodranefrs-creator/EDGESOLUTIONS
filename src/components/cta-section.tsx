@@ -31,12 +31,12 @@ export function CTASection({ id = "cta" }: { id?: string }) {
             vectorEffect="non-scaling-stroke"
             pathLength={1}
           />
-          {/* nodes the signal passes through */}
-          <circle cx="980" cy="22" r="3" fill="var(--bg)" stroke="currentColor" strokeWidth="1.25" pathLength={1} />
-          <circle cx="660" cy="44" r="3" fill="var(--bg)" stroke="currentColor" strokeWidth="1.25" pathLength={1} />
-          <circle cx="300" cy="78" r="3" fill="var(--bg)" stroke="currentColor" strokeWidth="1.25" pathLength={1} />
-          {/* termination — the live endpoint */}
-          <circle cx="92" cy="179" r="3.5" fill="#0092fc" stroke="none" pathLength={1} className="signal-dot" />
+          {/* nodes the signal passes through — standardized ring nodes */}
+          <circle cx="980" cy="22" r="3.25" fill="var(--bg-deeper)" stroke="currentColor" strokeWidth="1.25" pathLength={1} />
+          <circle cx="660" cy="44" r="3.25" fill="var(--bg-deeper)" stroke="currentColor" strokeWidth="1.25" pathLength={1} />
+          <circle cx="300" cy="78" r="3.25" fill="var(--bg-deeper)" stroke="currentColor" strokeWidth="1.25" pathLength={1} />
+          {/* termination — the live endpoint where the system resolves */}
+          <circle cx="92" cy="179" r="4" fill="#0092fc" stroke="none" pathLength={1} className="signal-dot" />
         </svg>
       </Inview>
 
@@ -44,7 +44,7 @@ export function CTASection({ id = "cta" }: { id?: string }) {
         <div className="relative pt-16 md:pt-24">
           <Inview>
             <p className="label-mono text-fg-faint">Contact</p>
-            <h2 id="cta-heading" className="display-l mt-7 max-w-4xl">
+            <h2 id="cta-heading" className="display-statement max-w-4xl">
               Tell us what needs to&nbsp;connect.
             </h2>
             <p className="type-body measure mt-8 max-w-xl text-fg-muted">

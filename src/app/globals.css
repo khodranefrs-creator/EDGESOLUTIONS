@@ -37,6 +37,14 @@
   --accent: var(--signal-deep); /* signal as text/action on paper */
   --accent-ink: #ffffff;
   --error: #c13f2b;
+
+  /* hero geometry — the brand type scale and the drop from the top
+     of the hero content row to the baseline of the wordmark's second
+     line. The specimen plate is padded down by the same amount so its
+     top border lands exactly on that baseline; the signal trace runs
+     along it. Coefficient calibrated against rendered font metrics. */
+  --hero-type: clamp(4.5rem, 13vw, 13rem);
+  --hero-drop: calc(3.3rem + var(--hero-type) * 1.648);
 }
 
 /* graphite context — statement, disciplines, resolution, colophon */
@@ -120,17 +128,28 @@ body {
 }
 
 /* ------------------------------------------------------- typography
-   Architectural display, editorial body, technical annotation.
-   Sentence case dominates. Contrast comes from scale and weight. */
+   Five explicit tiers — every level of the document knows its size:
+
+   TIER 1  .display-hero        brand signature (hero only)
+   TIER 2  .display-statement   major declarative statements
+   TIER 3  .display-functional  functional section headings
+   TIER 4  .display-product     product / capability names
+   ——      .type-title          minor run heads
+   ——      .type-lede/.type-body editorial voice
+   META    .label-mono/.meta-mono technical metadata only
+
+   The legacy aliases (.display-xl/.l/.m) map onto tiers 2–4 so
+   existing documents keep rendering identically. */
 
 .display-hero {
   font-family: var(--font-display);
-  font-size: clamp(4.5rem, 13vw, 13rem);
+  font-size: var(--hero-type);
   line-height: 0.86;
   letter-spacing: -0.04em;
   font-weight: 600;
 }
 
+.display-statement,
 .display-xl {
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 1.6rem + 4.6vw, 5.6rem);
@@ -139,6 +158,7 @@ body {
   font-weight: 600;
 }
 
+.display-functional,
 .display-l {
   font-family: var(--font-display);
   font-size: clamp(2.15rem, 1.5rem + 3vw, 3.9rem);
@@ -147,6 +167,7 @@ body {
   font-weight: 600;
 }
 
+.display-product,
 .display-m {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 1.32rem + 1.4vw, 2.45rem);
@@ -290,6 +311,34 @@ body {
 }
 .hairline-b {
   border-bottom: 1px solid var(--line);
+}
+
+/* ------------------------------------------------- blue marker system
+   EXACTLY two blue marks exist in this design system.
+
+   1. .mark-brand — the square terminal of the wordmark ("Edge▪").
+      SQUARE. Belongs to the brand alone. Scales with its type.
+   2. .node-signal — the standardized signal node: a 7px CIRCLE used
+      only where a connection terminates — traces, diagram endpoints,
+      pinned relations. Never decorative, never resized arbitrarily.
+
+   Square = brand. Circle = signal. The two are never interchangeable. */
+
+.mark-brand {
+  display: inline-block;
+  width: 0.085em;
+  height: 0.085em;
+  margin-left: 0.055em;
+  background: var(--signal);
+}
+
+.node-signal {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: var(--signal);
 }
 
 /* nameplate — official logo presentation on non-white grounds */
@@ -452,6 +501,58 @@ html:not(.js) .signal-dot {
 html:not(.js) .rise-in {
   opacity: 1;
   animation: none;
+}
+
+/* hero signal trace — the line draws itself from the wordmark to the
+   specimen, then the endpoint node goes live. */
+.hero-trace {
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: trace-draw 700ms var(--ease-engineered) forwards;
+  animation-delay: 600ms;
+}
+.hero-trace-bridge {
+  animation-delay: 950ms;
+}
+@keyframes trace-draw {
+  to {
+    transform: scaleX(1);
+  }
+}
+.hero-node {
+  opacity: 0;
+  animation: node-live 380ms ease forwards;
+  animation-delay: 1450ms;
+}
+@keyframes node-live {
+  to {
+    opacity: 1;
+  }
+}
+html:not(.js) .hero-trace,
+html:not(.js) .hero-node {
+  transform: none;
+  opacity: 1;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-trace,
+  .hero-node {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* specimen plate drop — aligns the plate's top border with the
+   wordmark baseline on desktop so the signal trace lands on it */
+.plate-drop {
+  padding-top: 0;
+}
+@media (min-width: 1024px) {
+  .plate-drop {
+    padding-top: var(--hero-drop);
+  }
 }
 
 /* environment change — product catalog */

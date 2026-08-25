@@ -1,43 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Inview } from "@/components/inview";
 import mtpTrunkAssembly from "@/assets/mtp-trunk-assembly.webp";
 
 /* 01 — IDENTITY
-   White paper. The wordmark dominates; a single drawn signal line
-   travels from the typography to the product specimen — engineering
-   → connection → product. The approved assembly is presented as a
-   documented specimen on an engineering plate, not as merchandise. */
+   The wordmark is the brand signature: "Clear / Edge" terminated by
+   the brand mark (blue square). Its baseline is the drawing's datum
+   line — the signal trace runs from the square along the baseline,
+   crosses the column gap and lands on the specimen plate, whose top
+   border is mounted at exactly that height. Headline → trace → node
+   → specimen: one controlled path, zero decoration. */
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-bg text-fg" aria-labelledby="hero-heading">
-      {/* the connection line — drawn once on arrival */}
-      <Inview
-        variant="draw"
-        className="pointer-events-none absolute inset-0 hidden text-fg-faint lg:block"
-      >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 760"
-          preserveAspectRatio="none"
-          fill="none"
-          className="block h-full w-full"
-        >
-          <path
-            d="M540 336 H660 C700 336 706 372 752 372 H866"
-            stroke="currentColor"
-            strokeWidth="1"
-            vectorEffect="non-scaling-stroke"
-            pathLength={1}
-          />
-          <circle cx="872" cy="372" r="3.5" fill="#0092fc" stroke="none" pathLength={1} className="signal-dot" />
-        </svg>
-      </Inview>
-
-      <div className="relative mx-auto grid max-w-[88rem] items-center gap-16 px-5 pb-14 pt-32 md:px-10 md:pt-44 lg:min-h-[88svh] lg:grid-cols-[1.02fr_0.98fr] lg:gap-10">
+      <div className="relative mx-auto grid max-w-[88rem] items-start gap-x-10 gap-y-14 px-5 pb-16 pt-32 md:px-10 md:pt-44 lg:min-h-[88svh] lg:grid-cols-[1.02fr_0.98fr] lg:gap-y-0 lg:pb-20">
         {/* identity */}
-        <div>
+        <div className="relative">
           <p className="label-mono text-fg-faint rise-in" style={{ "--rise-delay": 0 } as React.CSSProperties}>
             Engineered connections. Real-world impact.
           </p>
@@ -52,16 +30,31 @@ export function Hero() {
             </span>
             <span
               aria-hidden="true"
-              className="display-hero block rise-in"
+              className="display-hero rise-in block lg:flex lg:items-baseline"
               style={{ "--rise-delay": 190 } as React.CSSProperties}
             >
-              Edge<span className="text-signal">.</span>
+              <span>Edge</span>
+              <span data-probe="brand-square" className="mark-brand" aria-hidden="true" />
+              {/* the signal trace — runs along the baseline to the plate */}
+              <span
+                aria-hidden="true"
+                className="hero-trace ml-[0.09em] hidden h-px flex-grow bg-fg-faint/70 lg:block"
+              />
+              <span
+                aria-hidden="true"
+                className="hero-trace hero-trace-bridge relative -mr-[41px] hidden w-[41px] flex-none bg-fg-faint/70 lg:block"
+              >
+                <span
+                  aria-hidden="true"
+                  className="hero-node node-signal absolute right-[-3px] top-1/2 -translate-y-1/2"
+                />
+              </span>
+              <span className="sr-only">ClearEdge Solutions</span>
             </span>
-            <span className="sr-only">ClearEdge Solutions</span>
           </h1>
 
           <p
-            className="type-lede measure mt-10 max-w-xl text-fg-muted rise-in"
+            className="type-lede measure mt-12 max-w-xl text-fg-muted rise-in"
             style={{ "--rise-delay": 320 } as React.CSSProperties}
           >
             Engineered connectivity between the requirement and the running
@@ -85,9 +78,10 @@ export function Hero() {
           </div>
         </div>
 
-        {/* the specimen plate */}
+        {/* the specimen plate — mounted on the wordmark baseline */}
         <figure
-          className="relative rise-in"
+          data-probe="plate"
+          className="plate-drop relative rise-in"
           style={{ "--rise-delay": 300 } as React.CSSProperties}
         >
           <div className="plate reg-corners tech-grid bg-white px-7 py-7 text-fg-muted sm:px-10 sm:py-9">
@@ -104,11 +98,6 @@ export function Hero() {
                 priority
                 sizes="(max-width: 1024px) 100vw, 600px"
                 className="h-auto max-h-[380px] w-full object-contain lg:max-h-[420px]"
-              />
-              {/* connector endpoint on the plate edge */}
-              <span
-                aria-hidden="true"
-                className="absolute left-[-35px] top-1/2 hidden h-[7px] w-[7px] -translate-y-1/2 bg-signal lg:block"
               />
             </div>
             <p className="mt-5 border-t border-line pt-4 text-sm font-medium text-fg">
