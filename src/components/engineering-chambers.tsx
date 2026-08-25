@@ -109,7 +109,7 @@ export function EngineeringChambers({ withIds = false }: { withIds?: boolean }) 
               <Link
                 href={d.href}
                 data-probe="chamber-row"
-                className="group relative mx-auto block max-w-[84rem] px-5 py-12 md:px-10 md:py-16 lg:py-20"
+                className="group relative mx-auto block max-w-[84rem] px-5 py-10 md:px-10 md:py-14 lg:py-[4.5rem]"
                 aria-label={`${d.name} — view capability`}
               >
                 {/* row architecture: index | title | description | indicator */}
@@ -126,7 +126,7 @@ export function EngineeringChambers({ withIds = false }: { withIds?: boolean }) 
 
                   <Title id={headingId} name={d.name} />
 
-                  <p className="text-sm leading-relaxed text-fg-muted lg:max-w-[22rem]">
+                  <p className="text-sm font-medium leading-relaxed text-fg-muted lg:max-w-[22rem]">
                     {d.line}
                   </p>
 

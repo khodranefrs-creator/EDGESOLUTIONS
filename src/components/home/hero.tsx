@@ -96,6 +96,7 @@ export function Hero() {
                 src={mtpTrunkAssembly}
                 alt="Multi-fiber trunk cable assembly with an aqua jacket and MPO-style connectors"
                 priority
+                quality={90}
                 sizes="(max-width: 1024px) 100vw, 600px"
                 className="h-auto max-h-[380px] w-full object-contain lg:max-h-[420px]"
               />

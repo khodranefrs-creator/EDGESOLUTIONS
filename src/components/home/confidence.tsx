@@ -59,7 +59,7 @@ export function Confidence() {
                     </span>
                     {d.term}
                   </dt>
-                  <dd className="min-w-0 text-sm leading-relaxed text-fg-muted">
+                  <dd className="min-w-0 text-sm font-medium leading-relaxed text-fg-muted">
                     {d.note}
                   </dd>
                 </div>

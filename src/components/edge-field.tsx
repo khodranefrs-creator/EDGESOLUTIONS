@@ -56,8 +56,8 @@ export function EdgeField() {
             className="absolute inset-0 h-full w-full text-fg-muted"
           >
             {/* faint column rails */}
-            <line x1="218" y1="24" x2="218" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.28" />
-            <line x1="782" y1="24" x2="782" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.28" />
+            <line x1="218" y1="24" x2="218" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.35" />
+            <line x1="782" y1="24" x2="782" y2="596" stroke="currentColor" strokeWidth="1" opacity="0.35" />
 
             {EDGES.map(({ industry, family }) => {
               const iy = INDUSTRY_Y[industry];
@@ -73,7 +73,7 @@ export function EdgeField() {
                   strokeWidth={live ? 2 : 1.5}
                   strokeLinecap="round"
                   strokeDasharray={live ? "none" : "0.1 6.5"}
-                  opacity={live ? 1 : dim ? 0.15 : 0.75}
+                  opacity={live ? 1 : dim ? 0.25 : 0.85}
                   vectorEffect="non-scaling-stroke"
                   className="transition-all duration-300"
                 />
@@ -93,7 +93,7 @@ export function EdgeField() {
                   stroke={live ? "#0092fc" : "currentColor"}
                   strokeWidth={live ? 2 : 1.75}
                   fill={live ? "#0092fc" : "var(--bg)"}
-                  opacity={dim ? 0.28 : 1}
+                  opacity={dim ? 0.4 : 1}
                   vectorEffect="non-scaling-stroke"
                   className="transition-all duration-300"
                 />
@@ -114,7 +114,7 @@ export function EdgeField() {
                   fill={live ? "#0092fc" : "var(--bg)"}
                   stroke={live ? "#0092fc" : "currentColor"}
                   strokeWidth="1.75"
-                  opacity={dim ? 0.25 : 1}
+                  opacity={dim ? 0.35 : 1}
                   vectorEffect="non-scaling-stroke"
                   className="transition-all duration-300"
                 />
@@ -166,7 +166,7 @@ export function EdgeField() {
                 key={fam.id}
                 aria-hidden="true"
                 className={`pointer-events-none absolute left-[81%] max-w-[17rem] -translate-y-1/2 pl-10 transition-opacity duration-300 ${
-                  dim ? "opacity-35" : "opacity-100"
+                  dim ? "opacity-45" : "opacity-100"
                 }`}
                 style={{ top: `${(FAMILY_XY[fam.id].y / 620) * 100}%` }}
               >
