@@ -46,6 +46,18 @@ export function SiteHeader() {
     setDirectoryOpen(false);
   }, [pathname]);
 
+  /* viewport crossing must close the mode-mismatched menu: the full-
+     screen phone directory can never be left stranded over the desktop
+     layout, and the hover directory cannot survive below the lg break */
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setOpen(false);
+      else setDirectoryOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   /* mobile directory: scroll lock + initial focus + Escape + tab trap */
   useEffect(() => {
     if (!open) return;
@@ -229,7 +241,7 @@ export function SiteHeader() {
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="mt-4 block font-display text-[1.42rem] font-semibold leading-snug tracking-[-0.02em] transition-colors duration-150 group-hover:text-accent">
-                        {family.name}
+                        {family.shortName}
                       </span>
                       <span className="mt-3 block min-h-[3.6rem] text-[0.86rem] leading-relaxed text-fg-muted">
                         {family.tagline}.
